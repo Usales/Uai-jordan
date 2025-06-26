@@ -1,3 +1,51 @@
+# Uai-Jordan
+
+Projeto desenvolvido como vitrine de produtos inspirados na linha Air Jordan, com foco em experiência visual, animações modernas e responsividade.
+
+## Funcionalidades
+- Carrossel animado de tênis com efeito de flutuação e esfera dinâmica ao fundo
+- Esferas/barras orbitando a esfera principal com animação circular
+- Modal de detalhes do produto com imagem grande, seleção de cor/modelo, tamanhos, estrelas e botão de compra
+- Seção "Por que escolher a UAI-JORDAN?" com cards informativos
+- Seção "Produtos em Destaque" com todos os tênis do carrossel
+- Rodapé moderno com links úteis, contato e informações do projeto
+- Animação de entrada suave na tela inicial
+- Totalmente responsivo e visual minimalista
+
+## Tecnologias Utilizadas
+- ReactJS (Vite)
+- JavaScript (ES6+)
+- CSS3 (moderno, responsivo, animações)
+- HTML5
+
+## Como baixar e rodar o projeto
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/SEU_USUARIO/Uai-jordan.git
+   ```
+2. **Acesse a pasta do projeto:**
+   ```bash
+   cd Uai-jordan
+   ```
+3. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
+4. **Rode o projeto:**
+   ```bash
+   npm run dev
+   ```
+5. **Acesse no navegador:**
+   Abra [http://localhost:5173](http://localhost:5173) ou o endereço indicado no terminal.
+
+---
+
+### Observações
+- Projeto feito em React, Javascript e CSS. Feito como pedido para um cliente, trabalho como freelancer de 3 semanas.
+- Imagens dos tênis são ilustrativas e obtidas da internet.
+- Para dúvidas ou sugestões, entre em contato pelo e-mail: GabrielHenriqueslsales1@gmail.com
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
