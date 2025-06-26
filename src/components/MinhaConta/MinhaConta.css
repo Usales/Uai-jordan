@@ -1,0 +1,193 @@
+.minha-conta-container {
+  max-width: 400px;
+  margin: 60px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 36px 28px 28px 28px;
+  text-align: center;
+}
+.minha-conta-container h2 {
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  font-size: 2.2rem;
+  color: #D72B3D;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.minha-conta-dados {
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: left;
+}
+.minha-conta-dados p {
+  margin-bottom: 10px;
+}
+.minha-conta-logout {
+  background: #b71c2b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.minha-conta-logout:hover {
+  background: #D72B3D;
+}
+.minha-conta-dashboard {
+  display: flex;
+  max-width: 900px;
+  margin: 60px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  min-height: 350px;
+  margin-bottom: 170px;
+}
+
+.minha-conta-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f7f7f7;
+  border-radius: 16px 0 0 16px;
+  padding: 32px 18px 32px 18px;
+  min-width: 140px;
+  align-items: flex-start;
+}
+.minha-conta-menu button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #D72B3D;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color 0.2s, font-weight 0.2s;
+}
+.minha-conta-menu button.ativo {
+  color: #fff;
+  background: #D72B3D;
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 6px 18px;
+}
+.logout-btn {
+  color: #b71c2b;
+  margin-top: 24px;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  font-size: 1.1rem;
+  background: #fff;
+  border: 1px solid #b71c2b;
+  border-radius: 8px;
+  padding: 6px 18px;
+  transition: background 0.2s, color 0.2s;
+}
+.logout-btn:hover {
+  background: #b71c2b;
+  color: #fff;
+}
+.minha-conta-conteudo {
+  flex: 1;
+  padding: 36px 32px;
+}
+.minha-conta-dados h3,
+.minha-conta-pedidos h3 {
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  font-size: 1.5rem;
+  color: #D72B3D;
+  margin-bottom: 18px;
+}
+.minha-conta-dados p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+.minha-conta-pedidos table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+.minha-conta-pedidos th, .minha-conta-pedidos td {
+  border: 1px solid #eee;
+  padding: 8px 10px;
+  text-align: center;
+}
+.minha-conta-pedidos th {
+  background: #f3f3f3;
+  color: #D72B3D;
+  font-weight: bold;
+}
+.minha-conta-dados label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #333;
+}
+.minha-conta-dados input[type="text"],
+.minha-conta-dados input[type="email"] {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 70%;
+}
+.minha-conta-dados-botoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.minha-conta-dados-botoes button {
+  background: #D72B3D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.minha-conta-dados-botoes .cancelar {
+  background: #888;
+}
+.minha-conta-editar {
+  background: #D72B3D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+.minha-conta-editar:hover {
+  background: #b71c2b;
+}
+.minha-conta-msg-sucesso {
+  color: #00863B;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+.btn-ver-detalhes {
+  background: #D72B3D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.btn-ver-detalhes:hover {
+  background: #b71c2b;
+} 

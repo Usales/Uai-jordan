@@ -34,6 +34,10 @@
   text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 }
 
+.carrossel-content, .carrossel-anim-wrapper {
+  min-height: 520px;
+}
+
 .carrossel-content {
   flex: 1;
   display: flex;
@@ -83,13 +87,13 @@
 
 @keyframes flutuarTenis {
   0% {
-    transform: translate(-50%, -50%) rotate(-18deg) translateY(0);
+    transform: translate(-50%, -50%) rotate(-18deg) scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) rotate(-18deg) translateY(-32px);
+    transform: translate(-50%, -50%) rotate(-18deg) scale(1.03);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(-18deg) translateY(0);
+    transform: translate(-50%, -50%) rotate(-18deg) scale(1);
   }
 }
 
@@ -389,6 +393,6 @@
 .estrela {
   color: #FFD600;
   font-size: 2rem;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 2px 8px rgba(0,0,0,0.10);
   line-height: 1;
 } 

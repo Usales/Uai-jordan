@@ -116,3 +116,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Finalizar Compra pelo WhatsApp
+
+- Ao clicar no botão **Finalizar Compra** no carrinho, o WhatsApp Web será aberto já com a mensagem do pedido preenchida, pronta para envio ao vendedor.
+- **Atenção:** Por limitações do próprio WhatsApp, o envio da mensagem não é automático. O usuário precisa clicar em **Enviar** no WhatsApp para concluir o pedido.
+- Caso o WhatsApp Desktop (aplicativo instalado) seja aberto, a mensagem pode não aparecer preenchida. Para garantir o funcionamento correto, utilize o WhatsApp Web pelo navegador.

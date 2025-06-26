@@ -1,25 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header({ bgColor }) {
   return (
     <header className="app-header" style={{ background: bgColor || '#D72B3D' }}>
       <nav className="nav-container">
-        <h1 className="brand-title">UAI-JORDAN</h1>
-        
+        <Link to="/" className="brand-title">UAI-JORDAN</Link>
         <ul className="nav-menu">
-          <li><a href="/loja">Loja</a></li>
-          <li><a href="/sobre">Sobre nós</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/cadastro">Cadastro</a></li>
+          <li><Link to="/loja">Loja</Link></li>
+          <li><Link to="/sobre">Sobre nós</Link></li>
         </ul>
-        
-        <button 
-          className="cart-button"
-          style={{ background: '#fff', color: bgColor || '#D72B3D' }}
-        >
-          Carrinho
-        </button>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Link to="/carrinho">
+            <button 
+              className="cart-button"
+              style={{ background: '#fff', color: bgColor || '#D72B3D' }}
+            >
+              Carrinho
+            </button>
+          </Link>
+        </div>
       </nav>
     </header>
   );

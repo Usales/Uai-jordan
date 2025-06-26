@@ -1,0 +1,21 @@
+.loja-container {
+    padding: 120px 40px 60px; /* Adiciona padding superior para não ficar atrás do header */
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+.loja-titulo {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    justify-items: center;
+} 

@@ -30,6 +30,7 @@
   letter-spacing: 2px;
   font-family: 'Segoe UI Black', 'Segoe UI Black', sans-serif;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .App .cart-button {
