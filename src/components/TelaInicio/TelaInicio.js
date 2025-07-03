@@ -71,7 +71,6 @@ function TelaInicio({ onHeaderColorChange }) {
   const [mensagemCarrinho, setMensagemCarrinho] = useState('');
   const featuresRef = useScrollFadeIn();
   const produtosRef = useScrollFadeIn();
-  const footerRef = useScrollFadeIn();
   const [showFade, setShowFade] = useState(false);
 
   useEffect(() => {
