@@ -1,21 +1,50 @@
 .loja-container {
-    padding: 120px 40px 60px; /* Adiciona padding superior para não ficar atrás do header */
+    padding: 80px 10px 30px; /* Mobile first: menos padding */
     background-color: #f4f4f4;
     min-height: 100vh;
 }
 
 .loja-titulo {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
     color: #333;
     font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .produtos-grid {
     display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    justify-items: center;
+}
+
+@media (min-width: 600px) {
+  .loja-container {
+    padding: 100px 24px 40px;
+  }
+  .loja-titulo {
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+  .produtos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  .loja-container {
+    padding: 120px 40px 60px;
+  }
+  .loja-titulo {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+  .produtos-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
-    justify-items: center;
+  }
 } 

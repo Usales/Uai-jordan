@@ -337,3 +337,39 @@
   opacity: 0;
   animation: fadeInUp 1.8s cubic-bezier(0.4,0.2,0.2,1) forwards;
 } 
+
+@media (max-width: 600px) {
+  .carrossel-tenis-container {
+    padding: 0.5rem 0.2rem !important;
+    min-height: 320px !important;
+  }
+  .carrossel-tenis-img {
+    max-width: 90vw !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto !important;
+  }
+  .carrossel-tenis-titulo, .carrossel-tenis-titulo strong {
+    font-size: 1.3rem !important;
+    line-height: 1.1;
+  }
+  .carrossel-tenis-preco {
+    font-size: 1.1rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  .carrossel-tenis-desc {
+    font-size: 0.98rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .btn-product {
+    width: 100% !important;
+    font-size: 1rem !important;
+    padding: 12px 0 !important;
+    margin-top: 0.5rem !important;
+    border-radius: 8px !important;
+  }
+  .modal-produto {
+    max-width: 98vw !important;
+    padding: 0.5rem !important;
+  }
+} 

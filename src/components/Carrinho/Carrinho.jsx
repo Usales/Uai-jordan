@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Carrinho.css';
 
 const Carrinho = () => {
   const [itens, setItens] = useState([]);
+  const [usuario, setUsuario] = useState(null);
+  const [showLoginMsg, setShowLoginMsg] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho') || '[]');
-    // Corrigir itens que tenham 'valor' ao invés de 'preco'
     let alterado = false;
     carrinhoSalvo = carrinhoSalvo.map(item => {
       if (!item.preco && item.valor) {
@@ -19,6 +22,9 @@ const Carrinho = () => {
       localStorage.setItem('carrinho', JSON.stringify(carrinhoSalvo));
     }
     setItens(carrinhoSalvo);
+    // Verifica usuário logado
+    const user = localStorage.getItem('usuario');
+    if (user) setUsuario(JSON.parse(user));
   }, []);
 
   const atualizarQuantidade = (index, novaQtd) => {
@@ -42,11 +48,15 @@ const Carrinho = () => {
   };
 
   const total = itens.reduce((acc, item) => {
-    const precoNum = Number(item.preco.replace(/[^\d,]/g, '').replace(',', '.'));
+    const precoNum = Number(item.preco.replace(/[^,]/g, '').replace(',', '.'));
     return acc + precoNum * item.quantidade;
   }, 0);
 
   const finalizarCompra = () => {
+    if (!usuario) {
+      setShowLoginMsg(true);
+      return;
+    }
     if (itens.length === 0) {
       alert('Seu carrinho está vazio!');
       return;
@@ -99,6 +109,12 @@ const Carrinho = () => {
           >
             Finalizar Compra
           </button>
+          {showLoginMsg && (
+            <div style={{ marginTop: '1rem', color: 'red', textAlign: 'center' }}>
+              <p>Você precisa estar logado para finalizar a compra.</p>
+              <button onClick={() => navigate('/login')} style={{ color: '#fff', background: '#D72B3D', border: 'none', borderRadius: '4px', padding: '8px 16px', marginTop: '8px', cursor: 'pointer' }}>Ir para Login</button>
+            </div>
+          )}
         </div>
       )}
     </div>

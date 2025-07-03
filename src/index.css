@@ -37,9 +37,98 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+  font-size: 16px;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 600px) {
+  body {
+    font-size: 18px;
+  }
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+    padding: 0;
+  }
+  .app-header, .nav-container {
+    min-height: 48px !important;
+    padding: 0 2px !important;
+  }
+  .brand-title {
+    font-size: 1.1rem !important;
+    letter-spacing: 0.5px !important;
+  }
+  .nav-menu a {
+    font-size: 0.95rem !important;
+    padding: 5px 6px !important;
+  }
+  .cart-button {
+    font-size: 0.98rem !important;
+    padding: 7px 10px !important;
+  }
+  /* Containers e cards */
+  .main-container, .card, .carrinho-container, .loja-container, .faq-container, .form-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 1rem 0.5rem !important;
+    margin: 1rem 0 !important;
+    border-radius: 8px !important;
+  }
+  /* Inputs e botões */
+  input, textarea, select, button {
+    font-size: 1rem !important;
+    padding: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  button {
+    min-width: 0 !important;
+    width: 100% !important;
+    font-size: 1.05rem !important;
+    padding: 10px 0 !important;
+  }
+  /* Listas e grids */
+  .produtos-grid, .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .product-card, .feature-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .brand-title {
+    font-size: 0.98rem !important;
+  }
+  .nav-menu a {
+    font-size: 0.85rem !important;
+    padding: 4px 2px !important;
+  }
+  .main-container, .card, .carrinho-container, .loja-container, .faq-container, .form-container {
+    padding: 0.5rem 0.2rem !important;
+    border-radius: 5px !important;
+  }
 }

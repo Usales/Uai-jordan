@@ -243,38 +243,89 @@
   border: 2px solid #222;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .carrossel-tenis {
-    min-height: 400px;
-    height: 100vh;
+    min-height: 340px !important;
+    width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .carrossel-content, .carrossel-anim-wrapper {
+    min-height: 220px !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .tenis-flutuante {
+    left: 50%;
+    top: 48% !important;
+    max-width: 95vw !important;
+    width: 95vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
   .tenis-flutuante img {
-    width: 220px;
+    width: 90vw !important;
+    max-width: 90vw !important;
+    min-width: 0 !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto !important;
   }
-  .tenis-flutuante h2 {
-    font-size: 1.1rem;
-    padding: 6px 12px;
-  }
-  .carrossel-navbar {
-    height: 56px;
-    padding: 0 16px;
-  }
-  .carrossel-logo {
-    font-size: 1.2rem;
+  .tenis-esfera {
+    width: 90vw !important;
+    height: 90vw !important;
+    left: 50% !important;
+    top: 50% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
   }
   .carrossel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-    margin: 0 8px;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.5rem !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    margin: 0 !important;
   }
-  .carrossel-indicadores {
-    bottom: 16px;
-    gap: 8px;
+  .carrossel-btn.left {
+    left: 6px !important;
+    right: auto !important;
   }
-  .carrossel-indicadores span {
-    width: 10px;
-    height: 10px;
+  .carrossel-btn.right {
+    right: 6px !important;
+    left: auto !important;
+  }
+  .carrossel-info, .carrossel-nome, .carrossel-descricao, .carrossel-valor, .carrossel-estrelas, .carrossel-comprar {
+    max-width: 95vw !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    word-break: break-word !important;
+  }
+  .carrossel-nome {
+    font-size: 1.2rem !important;
+    line-height: 1.1;
+  }
+  .carrossel-descricao {
+    font-size: 0.98rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .carrossel-valor {
+    font-size: 1.1rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  .carrossel-comprar {
+    width: 100% !important;
+    font-size: 1rem !important;
+    padding: 12px 0 !important;
+    margin-top: 0.5rem !important;
+    border-radius: 8px !important;
   }
 }
 
