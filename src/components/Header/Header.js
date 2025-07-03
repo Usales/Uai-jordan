@@ -33,7 +33,6 @@ function Header({ bgColor }) {
           <li><Link to="/contato">Contato</Link></li>
           <li><Link to="/politica-troca">Política de Troca</Link></li>
           <li><Link to="/faq">FAQ</Link></li>
-          <li><Link to="/rastrear-pedido">Rastrear Pedido</Link></li>
           <li><Link to="/minha-conta">Minha Conta</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>

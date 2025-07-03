@@ -5,15 +5,13 @@ import Footer from './components/Footer/Footer';
 import Loja from './components/Loja/Loja';
 import Sobre from './components/Sobre/Sobre';
 import Carrinho from './components/Carrinho/Carrinho';
-import MinhaConta from './components/MinhaConta/MinhaConta';
-import Cadastro from './components/Cadastro/Cadastro';
-import Login from './components/Login/Login';
+import MinhaConta from './pages/MinhaConta';
+import Login from './pages/Login';
 // Novas páginas
 import Home from './pages/Home';
 import Contato from './pages/Contato';
 import PoliticaTroca from './pages/PoliticaTroca';
 import FAQ from './pages/FAQ';
-import RastrearPedido from './pages/RastrearPedido';
 
 function App() {
   return (
@@ -26,11 +24,9 @@ function App() {
         <Route path="/contato" element={<Contato />} />
         <Route path="/carrinho" element={<Carrinho />} />
         <Route path="/minha-conta" element={<MinhaConta />} />
-        <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/politica-troca" element={<PoliticaTroca />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/rastrear-pedido" element={<RastrearPedido />} />
       </Routes>
       <Footer />
     </Router>

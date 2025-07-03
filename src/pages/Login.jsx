@@ -49,6 +49,9 @@ function Login() {
           </label>
         </div>
         <button type="submit" disabled={loading}>{loading ? 'Entrando...' : 'Entrar'}</button>
+        <button style={{ marginTop: 16, background: '#00863B', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 32px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>
+          Cadastrar
+        </button>
       </form>
       {status && (
         <p style={{ color: status.type === 'success' ? 'green' : 'red', marginTop: '1rem' }}>{status.msg}</p>

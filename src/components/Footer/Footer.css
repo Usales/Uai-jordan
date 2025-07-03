@@ -71,4 +71,34 @@
     min-width: 0;
     width: 100%;
   }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 32px 0 16px 0;
+  }
+  .footer-container {
+    padding: 0 8px;
+    gap: 20px;
+    align-items: center;
+  }
+  .footer-col {
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+  .footer-col ul li, .footer-projeto {
+    font-size: 0.98rem;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .footer-col ul li a {
+    font-size: 1rem;
+    padding: 6px 0;
+    display: inline-block;
+  }
 } 

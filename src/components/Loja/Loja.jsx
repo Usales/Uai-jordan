@@ -154,7 +154,7 @@ const Loja = () => {
 
     return (
         <>
-            <div className="loja-container">
+            <div className="loja-container fade-in-up">
                 <h1 className="loja-titulo">Nossos Produtos</h1>
                 <div className="produtos-grid">
                     {produtos.map(produto => (

@@ -3,14 +3,15 @@
 E-commerce fictício de tênis inspirado na linha Air Jordan, desenvolvido em React com funções serverless (Netlify Functions) para backend.
 
 ## Funcionalidades
-- Página inicial com carrossel responsivo de produtos em destaque
-- Loja com grid de produtos
-- Carrinho de compras persistente
-- Cadastro, login e área "Minha Conta"
+- Página inicial com carrossel animado e responsivo de produtos em destaque
+- Loja com grid de produtos e animação de entrada
+- Carrinho de compras persistente e animado
+- Cadastro, login e área "Minha Conta" com edição de dados
 - Formulário de contato funcional
 - Política de Troca e FAQ estilizados
-- Rastreio de pedidos (mock)
 - Navbar responsiva com menu hambúrguer
+- Rodapé moderno e totalmente responsivo
+- Todas as páginas possuem animação de entrada (fade-in-up)
 - Totalmente responsivo para mobile (testado em iPhone SE)
 
 ## Instalação e uso local
@@ -42,15 +43,21 @@ E-commerce fictício de tênis inspirado na linha Air Jordan, desenvolvido em Re
 
 ## Estrutura de pastas
 - `src/` — código React
-- `src/pages/` — páginas principais (Home, Contato, FAQ, etc)
-- `src/components/` — componentes reutilizáveis
+- `src/pages/` — todas as páginas principais (Home, Loja, Contato, FAQ, Política de Troca, Minha Conta, Login, etc)
+- `src/components/` — componentes reutilizáveis (Carrossel, Footer, Header, etc)
 - `netlify/functions/` — funções serverless (backend)
 - `public/` — imagens e arquivos estáticos
 
-## Responsividade
+## Responsividade e animações
 - O site é mobile-first, com media queries para telas pequenas
-- Navbar, carrossel, cards, formulários e grids adaptados para celulares
+- Navbar, carrossel, cards, formulários, grids e rodapé adaptados para celulares
+- Todas as páginas possuem animação de entrada suave (fade-in-up)
 - Testado em iPhone SE, Android e desktop
+
+## Observações
+- O recurso de rastrear pedido foi removido.
+- O fluxo de autenticação/cadastro foi revisado para evitar login automático indevido.
+- O rodapé foi aprimorado para melhor experiência mobile.
 
 ## Licença
 Projeto educacional, sem fins comerciais.

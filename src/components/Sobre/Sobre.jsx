@@ -3,7 +3,7 @@ import './Sobre.css';
 
 const Sobre = () => {
   return (
-    <div className="sobre-container">
+    <div className="sobre-container fade-in-up">
       <div className="sobre-img-box">
         <img src="/imagens/logo.png" alt="Logo UAI Calçados" className="sobre-img" />
       </div>

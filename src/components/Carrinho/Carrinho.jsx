@@ -71,7 +71,7 @@ const Carrinho = () => {
   };
 
   return (
-    <div className="carrinho-container">
+    <div className="carrinho-container fade-in-up">
       <h2>Meu Carrinho</h2>
       {itens.length === 0 ? (
         <p className="carrinho-vazio">Seu carrinho está vazio.</p>
@@ -112,7 +112,7 @@ const Carrinho = () => {
           {showLoginMsg && (
             <div style={{ marginTop: '1rem', color: 'red', textAlign: 'center' }}>
               <p>Você precisa estar logado para finalizar a compra.</p>
-              <button onClick={() => navigate('/login')} style={{ color: '#fff', background: '#D72B3D', border: 'none', borderRadius: '4px', padding: '8px 16px', marginTop: '8px', cursor: 'pointer' }}>Ir para Login</button>
+              <button onClick={() => navigate('/minha-conta')} style={{ color: '#fff', background: '#D72B3D', border: 'none', borderRadius: '4px', padding: '8px 16px', marginTop: '8px', cursor: 'pointer' }}>Ir para Login</button>
             </div>
           )}
         </div>
