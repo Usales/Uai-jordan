@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import Cadastro, { CadastroBotaoVerde } from '../components/Cadastro/Cadastro';
-import Login from './Login';
 
 function LoginSimples({ onLogin }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
   const [mensagem, setMensagem] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -108,7 +107,7 @@ function MinhaConta() {
   const [usuario, setUsuario] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [loginKey, setLoginKey] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [editando, setEditando] = useState(false);
   const [dadosEdit, setDadosEdit] = useState({ nome: '', email: '', endereco: '', telefone: '', cpf: '' });
 
@@ -132,7 +131,7 @@ function MinhaConta() {
     localStorage.removeItem('usuarioLogado');
     setUsuario(null);
     setLoginKey(k => k + 1);
-    navigate('/minha-conta');
+    // navigate('/minha-conta');
   }
 
   if (!usuario) {
