@@ -85,7 +85,7 @@ function TelaInicio({ onHeaderColorChange }) {
 
   function abrirModal(produto) {
     setModalProduto(produto);
-    setTamanhoSelecionado('38');
+    setTamanhoSelecionado('');
     setMensagemCarrinho('');
   }
 

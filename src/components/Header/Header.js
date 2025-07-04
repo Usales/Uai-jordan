@@ -50,4 +50,4 @@ function Header({ bgColor }) {
   );
 }
 
-export default Header; 
+export default Header;
