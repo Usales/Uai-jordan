@@ -126,6 +126,13 @@ function TelaInicio({ onHeaderColorChange }) {
 
   return (
     <div className={`tela-inicio${showFade ? ' fade-in-up' : ''}`}>
+      <section className="hero-section">
+        <div className="hero-content">
+          <h1 className="hero-title">UAI Calçados</h1>
+          <p className="hero-subtitle">Estilo, conforto e atitude — direto de Minas</p>
+          <a href="#produtos" className="hero-cta">Ver Coleção</a>
+        </div>
+      </section>
       <CarrosselTenis onColorChange={handleColorChange} onComprar={abrirModal} />
       <section className="features-section" ref={featuresRef}>
         <div className="container">
@@ -154,7 +161,7 @@ function TelaInicio({ onHeaderColorChange }) {
           </div>
         </div>
       </section>
-      <section className="products-preview" style={{ background: '#f3f3f3' }} ref={produtosRef}>
+      <section id="produtos" className="products-preview" style={{ background: '#f3f3f3' }} ref={produtosRef}>
         <div className="container">
           <h2 className="section-title">Produtos em Destaque</h2>
           <div className="products-grid">

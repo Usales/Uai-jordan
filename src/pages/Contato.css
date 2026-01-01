@@ -10,7 +10,7 @@
 .contato-container {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
   padding: 2.5rem 1.5rem;
   max-width: 500px;
   width: 100%;

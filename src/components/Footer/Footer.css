@@ -3,7 +3,18 @@
   color: #fff;
   padding: 64px 0 40px 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  border-top: 1px solid #374151;
+  border-top: 3px solid #C51F1F;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #374151;
 }
 
 .footer-container {
@@ -25,9 +36,9 @@
 }
 
 .footer-col h3 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   color: #fff;
   letter-spacing: 0.3px;
 }
@@ -50,6 +61,8 @@
   text-decoration: none;
   transition: color 0.2s;
   font-weight: 400;
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-col ul li a:hover {
