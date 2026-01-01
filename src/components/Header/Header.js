@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header({ bgColor, noSticky }) {
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -27,13 +28,13 @@ function Header({ bgColor, noSticky }) {
           <span style={{ transform: menuOpen ? 'rotate(-45deg) translateY(-8px)' : 'none' }}></span>
         </button>
         <ul className={`nav-menu${menuOpen ? ' open' : ''}`} onClick={closeMenu}>
-          <li><Link to="/">Início</Link></li>
-          <li><Link to="/loja">Loja</Link></li>
-          <li><Link to="/sobre">Sobre nós</Link></li>
-          <li><Link to="/contato">Contato</Link></li>
-          <li><Link to="/politica-troca">Política de Troca</Link></li>
-          <li><Link to="/faq">FAQ</Link></li>
-          <li><Link to="/minha-conta">Minha Conta</Link></li>
+          <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Início</Link></li>
+          <li><Link to="/loja" className={location.pathname === '/loja' ? 'active' : ''}>Loja</Link></li>
+          <li><Link to="/sobre" className={location.pathname === '/sobre' ? 'active' : ''}>Sobre nós</Link></li>
+          <li><Link to="/contato" className={location.pathname === '/contato' ? 'active' : ''}>Contato</Link></li>
+          <li><Link to="/politica-troca" className={location.pathname === '/politica-troca' ? 'active' : ''}>Política de Troca</Link></li>
+          <li><Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link></li>
+          <li><Link to="/minha-conta" className={location.pathname === '/minha-conta' ? 'active' : ''}>Minha Conta</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
           <Link to="/carrinho" onClick={closeMenu}>

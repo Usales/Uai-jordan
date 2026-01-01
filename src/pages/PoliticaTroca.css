@@ -10,7 +10,7 @@
 
 /* Card premium da política */
 .policy-card {
-  max-width: 900px;
+  max-width: 1000px;
   width: 100%;
   background: #ffffff;
   border-radius: 16px;
@@ -86,7 +86,7 @@
   border-left: 4px solid #C51F1F;
   background: #fafafa;
   border-radius: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .section h3 {

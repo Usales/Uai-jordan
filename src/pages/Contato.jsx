@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Contato.css';
 
 function Contato() {
   const [form, setForm] = useState({ nome: '', email: '', mensagem: '' });
@@ -33,33 +34,57 @@ function Contato() {
   }
 
   return (
-    <div style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}>
-      <div className="contato-container fade-in-up" style={{ background: '#fff', borderRadius: 16, boxShadow: '0 2px 16px rgba(0,0,0,0.08)', padding: '2.5rem 1.5rem', maxWidth: 500, width: '100%', margin: '2.5rem auto', minHeight: 350 }}>
-        <h1 style={{ textAlign: 'center', marginBottom: 24, color: '#D72B3D', fontFamily: 'Bebas Neue, Arial, sans-serif', fontSize: '2rem', letterSpacing: 1 }}>Contato</h1>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ marginBottom: '1.2rem' }}>
-            <label style={{ fontWeight: 500 }}>Nome:<br />
-              <input type="text" name="nome" value={form.nome} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid #ccc', marginTop: 4 }} required />
-            </label>
+    <div className="contato-page">
+      <div className="contato-container fade-in-up">
+        <h1>Contato</h1>
+        <p className="contato-subtitle">Tem alguma dúvida? Fale com a gente.</p>
+        <form onSubmit={handleSubmit} className="contato-form">
+          <div className="form-group">
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              value={form.nome}
+              onChange={handleChange}
+              placeholder="Seu nome completo"
+              required
+            />
           </div>
-          <div style={{ marginBottom: '1.2rem' }}>
-            <label style={{ fontWeight: 500 }}>Email:<br />
-              <input type="email" name="email" value={form.email} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid #ccc', marginTop: 4 }} required />
-            </label>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Seu melhor email"
+              required
+            />
           </div>
-          <div style={{ marginBottom: '1.2rem' }}>
-            <label style={{ fontWeight: 500 }}>Mensagem:<br />
-              <textarea name="mensagem" rows={4} value={form.mensagem} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid #ccc', marginTop: 4 }} required />
-            </label>
+          <div className="form-group">
+            <label htmlFor="mensagem">Mensagem:</label>
+            <textarea
+              id="mensagem"
+              name="mensagem"
+              rows={4}
+              value={form.mensagem}
+              onChange={handleChange}
+              placeholder="Como podemos te ajudar?"
+              required
+            />
           </div>
-          <button type="submit" disabled={loading} style={{ width: '100%', background: '#D72B3D', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 0', fontWeight: 700, fontSize: 18, cursor: 'pointer', marginTop: 8 }}>{loading ? 'Enviando...' : 'Enviar'}</button>
+          <button type="submit" disabled={loading} className="contato-button">
+            {loading ? 'Enviando...' : 'Enviar'}
+          </button>
         </form>
         {status && (
-          <p style={{ color: status.type === 'success' ? 'green' : 'red', marginTop: '1.5rem', textAlign: 'center' }}>{status.msg}</p>
+          <p className={`status-message ${status.type}`}>{status.msg}</p>
         )}
       </div>
     </div>
   );
 }
 
-export default Contato; 
+export default Contato;

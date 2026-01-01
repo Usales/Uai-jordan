@@ -24,16 +24,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 70px;
+  min-height: 60px;
 }
 
 .brand-title {
   font-size: 18px;
-  font-weight: bolder;
+  font-weight: 900;
   color: #fff;
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   font-family: 'Segoe UI Black', 'Segoe UI Black', sans-serif;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -100,6 +100,15 @@
 
 .nav-menu a:hover::after {
   transform: translateX(-50%) scaleX(1);
+}
+
+.nav-menu a.active {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 4px;
+}
+
+.nav-menu a.active::after {
+  display: none;
 }
 
 .nav-menu li:nth-child(2) a {
@@ -255,7 +264,7 @@
 @media (min-width: 768px) {
   .nav-container {
     padding: 0 8px;
-    min-height: 70px;
+    min-height: 60px;
     /* max-width removido */
   }
   .brand-title {

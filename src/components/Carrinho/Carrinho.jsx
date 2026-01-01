@@ -74,7 +74,14 @@ const Carrinho = () => {
     <div className="carrinho-container fade-in-up">
       <h2>Meu Carrinho</h2>
       {itens.length === 0 ? (
-        <p className="carrinho-vazio">Seu carrinho está vazio.</p>
+        <div className="carrinho-vazio-container">
+          <div className="carrinho-vazio-icon">🛒</div>
+          <h3 className="carrinho-vazio-titulo">Seu carrinho está vazio 😕</h3>
+          <p className="carrinho-vazio-texto">Que tal conferir nossos produtos mais vendidos?</p>
+          <button className="carrinho-vazio-botao" onClick={() => navigate('/loja')}>
+            Ir para a Loja
+          </button>
+        </div>
       ) : (
         <div className="carrinho-lista">
           {itens.map((item, idx) => (
@@ -104,7 +111,6 @@ const Carrinho = () => {
           <div className="carrinho-total">Total: R$ {total.toFixed(2).replace('.', ',')}</div>
           <button 
             className="carrinho-finalizar"
-            style={{marginTop: '16px', padding: '12px 24px', fontSize: '1rem', background: '#25d366', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer'}}
             onClick={finalizarCompra}
           >
             Finalizar Compra
