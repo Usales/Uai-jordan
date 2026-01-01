@@ -17,6 +17,11 @@
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #C51F1F 0%, #a01818 100%);
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 100px 20px;
   text-align: center;
   color: #fff;
@@ -49,14 +54,61 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  overflow: hidden;
+}
+
+.hero-section:not(.hero-animated) .hero-letter {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+
+.hero-letter {
+  display: inline-block;
+}
+
+.hero-animated .hero-letter {
+  animation: letterDrop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes letterDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) rotate(-10deg);
+  }
+  60% {
+    transform: translateY(10px) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
   font-weight: 400;
   margin: 0 0 40px 0;
-  opacity: 0.95;
   line-height: 1.6;
+}
+
+.hero-section:not(.hero-animated) .hero-subtitle {
+  opacity: 0;
+}
+
+.hero-animated .hero-subtitle {
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
 }
 
 .hero-cta {
@@ -70,6 +122,29 @@
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section:not(.hero-animated) .hero-cta {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.hero-animated .hero-cta {
+  animation: buttonPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.8s forwards;
+}
+
+@keyframes buttonPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .hero-cta:hover {

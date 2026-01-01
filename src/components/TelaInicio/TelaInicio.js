@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import CarrosselTenis from './CarrosselTenis';
 import './TelaInicio.css';
 
@@ -80,9 +81,54 @@ function TelaInicio({ onHeaderColorChange }) {
   const featuresRef = useScrollFadeIn();
   const produtosRef = useScrollFadeIn();
   const [showFade, setShowFade] = useState(false);
+  const heroRef = useRef(null);
+  const [heroVisible, setHeroVisible] = useState(false);
 
   useEffect(() => {
     setShowFade(true);
+  }, []);
+
+  useEffect(() => {
+    const currentRef = heroRef.current;
+    if (!currentRef) return;
+
+    let hasAnimated = false;
+
+    const triggerAnimation = () => {
+      if (!hasAnimated) {
+        hasAnimated = true;
+        setHeroVisible(true);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          triggerAnimation();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+
+    observer.observe(currentRef);
+
+    // Fallback: verifica se já está visível após um pequeno delay
+    const checkTimer = setTimeout(() => {
+      if (currentRef) {
+        const rect = currentRef.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+          triggerAnimation();
+          observer.disconnect();
+        }
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(checkTimer);
+      observer.disconnect();
+    };
   }, []);
 
   function handleColorChange(tenis) {
@@ -126,14 +172,24 @@ function TelaInicio({ onHeaderColorChange }) {
 
   return (
     <div className={`tela-inicio${showFade ? ' fade-in-up' : ''}`}>
-      <section className="hero-section">
+      <CarrosselTenis onColorChange={handleColorChange} onComprar={abrirModal} />
+      <section ref={heroRef} className={`hero-section ${heroVisible ? 'hero-animated' : ''}`}>
         <div className="hero-content">
-          <h1 className="hero-title">UAI Calçados</h1>
+          <h1 className="hero-title">
+            {'UAI Calçados'.split('').map((char, index) => (
+              <span 
+                key={index} 
+                className="hero-letter"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </h1>
           <p className="hero-subtitle">Estilo, conforto e atitude — direto de Minas</p>
-          <a href="#produtos" className="hero-cta">Ver Coleção</a>
+          <Link to="/loja" className="hero-cta">Ver Coleção</Link>
         </div>
       </section>
-      <CarrosselTenis onColorChange={handleColorChange} onComprar={abrirModal} />
       <section className="features-section" ref={featuresRef}>
         <div className="container">
           <h2 className="section-title">Por que escolher a UAI-JORDAN?</h2>
