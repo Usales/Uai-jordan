@@ -47,14 +47,16 @@
     border-radius: 50%;
     width: 35px;
     height: 35px;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
     color: #555;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s, color 0.2s, transform 0.2s;
+    line-height: 1;
 }
 
 .modal-close:hover {

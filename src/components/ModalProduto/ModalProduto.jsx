@@ -24,7 +24,7 @@ const ModalProduto = ({ produto, onClose }) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close" onClick={onClose}>X</button>
+                <button className="modal-close" onClick={onClose}>×</button>
                 
                 <div className="modal-body">
                     <div className="modal-galeria">
