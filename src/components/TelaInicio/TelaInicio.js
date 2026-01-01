@@ -45,6 +45,14 @@ const tenisData = [
     corFundo: '#BCF002',
     corNavbar: '#BCF002',
   },
+  {
+    nome: 'Uai Jordan 1 UNC',
+    descricao: 'O clássico que revolucionou o basquete e a cultura sneaker. Cabedal em couro premium, cores icônicas e conforto lendário.',
+    valor: 'R$ 1.299,00',
+    imagem: '/imagens/air-1.png',
+    corFundo: '#D72B3D',
+    corNavbar: '#D72B3D',
+  },
 ];
 
 function useScrollFadeIn() {
@@ -151,7 +159,7 @@ function TelaInicio({ onHeaderColorChange }) {
           <h2 className="section-title">Produtos em Destaque</h2>
           <div className="products-grid">
             {tenisData.map((tenis, i) => (
-              <div className="product-card" key={i}>
+              <div className="product-card" key={`${tenis.nome}-${i}`}>
                 <div className="product-image">
                   <img src={tenis.imagem} alt={tenis.nome} style={{ width: '180px', height: 'auto' }} />
                 </div>
