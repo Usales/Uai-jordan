@@ -8,6 +8,11 @@ const Loja = () => {
     const [produtos, setProdutos] = useState([]);
 
     useEffect(() => {
+        // Rola para o topo quando a página carregar
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, []);
+
+    useEffect(() => {
         // Simula o carregamento dos dados dos produtos
         const todosProdutos = [
             {
