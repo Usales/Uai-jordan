@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-function Header({ bgColor }) {
+function Header({ bgColor, noSticky }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -13,7 +13,7 @@ function Header({ bgColor }) {
   }
 
   return (
-    <header className="app-header" style={{ background: bgColor || '#D72B3D' }}>
+    <header className={`app-header${noSticky ? ' no-sticky' : ''}`} style={{ background: bgColor || '#D72B3D' }}>
       <nav className="nav-container">
         <Link to="/" className="brand-title" onClick={closeMenu}>UAI-JORDAN</Link>
         <button

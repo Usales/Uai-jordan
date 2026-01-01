@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Loja from './components/Loja/Loja';
@@ -13,10 +13,13 @@ import Contato from './pages/Contato';
 import PoliticaTroca from './pages/PoliticaTroca';
 import FAQ from './pages/FAQ';
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
-    <Router>
-      <Header />
+    <>
+      <Header noSticky={isHomePage} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/loja" element={<Loja />} />
@@ -29,6 +32,14 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
       </Routes>
       <Footer />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

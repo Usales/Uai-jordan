@@ -10,6 +10,11 @@
   animation: slideDown 0.5s ease-out;
 }
 
+.app-header.no-sticky {
+  position: relative !important;
+  display: block !important;
+}
+
 .nav-container {
   position: relative;
   width: 100%;

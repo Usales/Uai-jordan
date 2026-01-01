@@ -11,6 +11,12 @@
   align-items: stretch;
   transition: background 0.6s;
   overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.carrossel-tenis::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .carrossel-navbar {
@@ -36,6 +42,13 @@
 
 .carrossel-content, .carrossel-anim-wrapper {
   min-height: 520px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.carrossel-content::-webkit-scrollbar,
+.carrossel-anim-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .carrossel-content {
@@ -45,6 +58,7 @@
   justify-content: center;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .carrossel-anim-wrapper {
@@ -54,6 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .tenis-flutuante {

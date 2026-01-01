@@ -1,8 +1,17 @@
 /* TelaInicio Styles */
 .tela-inicio {
   overflow-x: hidden;
+  overflow-y: visible;
   min-height: 100vh;
   background: #f8f9fa;
+  position: relative;
+  width: 100%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.tela-inicio::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Container */
@@ -16,6 +25,15 @@
 .features-section {
   padding: 80px 0;
   background: white;
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.features-section::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .section-title {
@@ -68,6 +86,15 @@
 .products-preview {
   padding: 80px 0;
   background: #f8f9fa;
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.products-preview::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .products-grid {
@@ -80,7 +107,7 @@
 .product-card {
   background: white;
   border-radius: 15px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
 }
@@ -201,6 +228,21 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  scrollbar-width: thin; /* Firefox - mantém scrollbar fina no modal */
+  scrollbar-color: rgba(0,0,0,0.3) transparent;
+}
+
+.modal-produto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-produto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-produto::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 4px;
 }
 
 .modal-produto-img {
