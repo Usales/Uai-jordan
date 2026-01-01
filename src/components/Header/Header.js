@@ -13,7 +13,7 @@ function Header({ bgColor, noSticky }) {
   }
 
   return (
-    <header className={`app-header${noSticky ? ' no-sticky' : ''}`} style={{ background: bgColor || '#D72B3D' }}>
+    <header className={`app-header${noSticky ? ' no-sticky' : ''}`} style={{ background: bgColor || '#C51F1F' }}>
       <nav className="nav-container">
         <Link to="/" className="brand-title" onClick={closeMenu}>UAI-JORDAN</Link>
         <button
@@ -39,7 +39,7 @@ function Header({ bgColor, noSticky }) {
           <Link to="/carrinho" onClick={closeMenu}>
             <button 
               className="cart-button"
-              style={{ background: '#fff', color: bgColor || '#D72B3D' }}
+              style={{ background: '#fff', color: bgColor || '#C51F1F' }}
             >
               Carrinho
             </button>

@@ -1,6 +1,6 @@
 /* Header Styles - Mobile First */
 .app-header {
-  background: #D72B3D;
+  background: #C51F1F;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border: none;
   position: sticky;
@@ -24,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 56px;
+  min-height: 70px;
 }
 
 .brand-title {
@@ -79,11 +79,27 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 0.98rem;
-  padding: 5px 10px;
+  padding: 8px 14px;
   border-radius: 20px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 .nav-menu li:nth-child(2) a {
@@ -148,7 +164,7 @@
     position: absolute;
     top: 56px;
     right: 10px;
-    background: #D72B3D;
+    background: #C51F1F;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
@@ -311,7 +327,7 @@
     height: 48px !important;
     border: 2px solid #fff;
     border-radius: 50%;
-    background: #D72B3D !important;
+    background: #C51F1F !important;
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
     position: relative;
   }
