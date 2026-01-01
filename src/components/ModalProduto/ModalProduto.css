@@ -18,7 +18,7 @@
     width: 90vw;
     max-width: 900px;
     height: 90vh;
-    max-height: 600px;
+    max-height: 650px;
     position: relative;
     padding: 20px;
     display: flex;
@@ -68,7 +68,9 @@
     flex: 1;
     margin-top: 40px;
     gap: 30px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
 }
 
 /* Galeria de Imagens */
@@ -121,6 +123,8 @@
     flex: 4; /* 40% da largura */
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    padding-bottom: 10px;
 }
 
 .modal-nome {
@@ -178,7 +182,7 @@
 
 /* Botão Comprar */
 .modal-comprar {
-    margin-top: 175px;
+    margin-top: auto;
     width: 100%;
     padding: 15px;
     font-size: 1.1rem;
