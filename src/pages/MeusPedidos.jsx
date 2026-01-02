@@ -41,6 +41,7 @@ function MeusPedidos() {
   function getStatusInfo(status) {
     const statusMap = {
       'aguardando-pagamento': { label: 'Aguardando pagamento', icon: '⏳', cor: '#f59e0b' },
+      'aguardando-confirmacao-pix': { label: 'Aguardando confirmação PIX', icon: '💳', cor: '#32bcad' },
       'em-separacao': { label: 'Em separação', icon: '📦', cor: '#d97706' },
       'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7' },
       'entregue': { label: 'Entregue', icon: '✅', cor: '#059669' },

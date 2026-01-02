@@ -6,6 +6,7 @@ function DetalhesPedido() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pedido, setPedido] = useState(null);
+  const [pagamentoConfirmado, setPagamentoConfirmado] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem('usuarioLogado');
@@ -36,6 +37,7 @@ function DetalhesPedido() {
   function getStatusInfo(status) {
     const statusMap = {
       'aguardando-pagamento': { label: 'Aguardando pagamento', icon: '⏳', cor: '#f59e0b', bg: '#fef3c7' },
+      'aguardando-confirmacao-pix': { label: 'Aguardando confirmação PIX', icon: '💳', cor: '#32bcad', bg: '#d1fae5' },
       'em-separacao': { label: 'Em separação', icon: '📦', cor: '#d97706', bg: '#fef3c7' },
       'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7', bg: '#dbeafe' },
       'entregue': { label: 'Entregue', icon: '✅', cor: '#059669', bg: '#d1fae5' },
@@ -43,6 +45,32 @@ function DetalhesPedido() {
     };
     return statusMap[status] || { label: status, icon: '📋', cor: '#666', bg: '#f3f4f6' };
   }
+
+  const handleConfirmarPagamentoPix = () => {
+    // Atualiza o status do pedido no localStorage
+    const todosPedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    const pedidosAtualizados = todosPedidos.map(p => {
+      if (p.id === pedido.id) {
+        return {
+          ...p,
+          status: 'aguardando-confirmacao-pix',
+          pagamento: 'PIX',
+          dataConfirmacaoPix: new Date().toISOString()
+        };
+      }
+      return p;
+    });
+    localStorage.setItem('pedidos', JSON.stringify(pedidosAtualizados));
+    
+    // Atualiza o estado local
+    setPedido({
+      ...pedido,
+      status: 'aguardando-confirmacao-pix',
+      pagamento: 'PIX'
+    });
+    
+    setPagamentoConfirmado(true);
+  };
 
   const statusInfo = getStatusInfo(pedido.status);
 
@@ -100,12 +128,44 @@ function DetalhesPedido() {
           </div>
         </div>
 
-        <div className="acoes-section">
-          <button className="btn-action">Baixar comprovante</button>
-          <Link to="/politica-troca" className="btn-action secondary">
-            Solicitar troca/devolução
-          </Link>
-        </div>
+        {pedido.status === 'aguardando-pagamento' && !pagamentoConfirmado ? (
+          <div className="pix-payment-box">
+            <h3>Realizar pagamento via PIX</h3>
+
+            <div className="pix-info">
+              <div className="pix-icon-wrapper">
+                <svg className="pix-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#32bcad"/>
+                </svg>
+              </div>
+              <div>
+                <p><strong>CNPJ:</strong> 62.164.737/0001-05</p>
+                <p className="pix-hint">
+                  Utilize o PIX para concluir o pagamento do pedido.
+                </p>
+              </div>
+            </div>
+
+            <button className="btn-action pix" onClick={handleConfirmarPagamentoPix}>
+              Confirmar pagamento via PIX
+            </button>
+
+            <p className="pix-warning">
+              Após o pagamento, o comprovante será gerado automaticamente.
+              <br />
+              A compra será aprovada em até <strong>24 horas</strong>.
+            </p>
+          </div>
+        ) : pagamentoConfirmado || pedido.status === 'aguardando-confirmacao-pix' ? (
+          <div className="pix-payment-box success">
+            <div className="success-message">
+              <div className="success-icon">✅</div>
+              <h3>Pagamento recebido</h3>
+              <p>Seu pedido será aprovado em até <strong>24 horas</strong>.</p>
+              <p className="success-detail">O comprovante foi gerado automaticamente.</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
