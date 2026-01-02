@@ -6,7 +6,7 @@ function DetalhesPedido() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pedido, setPedido] = useState(null);
-  const [pagamentoConfirmado, setPagamentoConfirmado] = useState(false);
+  const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem('usuarioLogado');
@@ -46,6 +46,10 @@ function DetalhesPedido() {
     return statusMap[status] || { label: status, icon: '📋', cor: '#666', bg: '#f3f4f6' };
   }
 
+  const handleMostrarConfirmacao = () => {
+    setMostrarConfirmacao(true);
+  };
+
   const handleConfirmarPagamentoPix = () => {
     // Atualiza o status do pedido no localStorage
     const todosPedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
@@ -68,8 +72,6 @@ function DetalhesPedido() {
       status: 'aguardando-confirmacao-pix',
       pagamento: 'PIX'
     });
-    
-    setPagamentoConfirmado(true);
   };
 
   const statusInfo = getStatusInfo(pedido.status);
@@ -128,7 +130,7 @@ function DetalhesPedido() {
           </div>
         </div>
 
-        {pedido.status === 'aguardando-pagamento' && !pagamentoConfirmado ? (
+        {pedido.status === 'aguardando-pagamento' ? (
           <div className="pix-payment-box">
             <h3>Realizar pagamento via PIX</h3>
 
@@ -139,28 +141,47 @@ function DetalhesPedido() {
                 </svg>
               </div>
               <div>
-                <p><strong>CNPJ:</strong> 62.164.737/0001-05</p>
+                <p className="pix-cnpj-label">Envie o PIX para:</p>
+                <p className="pix-cnpj-value"><strong>CNPJ:</strong> 62.164.737/0001-05</p>
+                <p className="pix-total-value">Valor: <strong>R$ {pedido.total.toFixed(2).replace('.', ',')}</strong></p>
                 <p className="pix-hint">
-                  Utilize o PIX para concluir o pagamento do pedido.
+                  Realize o pagamento via PIX no valor acima e clique no botão abaixo para confirmar.
                 </p>
               </div>
             </div>
 
-            <button className="btn-action pix" onClick={handleConfirmarPagamentoPix}>
-              Confirmar pagamento via PIX
-            </button>
-
-            <p className="pix-warning">
-              Após o pagamento, o comprovante será gerado automaticamente.
-              <br />
-              A compra será aprovada em até <strong>24 horas</strong>.
-            </p>
+            {!mostrarConfirmacao ? (
+              <>
+                <button className="btn-action pix-secondary" onClick={handleMostrarConfirmacao}>
+                  Já realizei o pagamento via PIX
+                </button>
+                <p className="pix-warning">
+                  Após realizar o pagamento, clique no botão acima para confirmar.
+                  <br />
+                  A compra será aprovada em até <strong>24 horas</strong> após a confirmação.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="pix-confirmacao-box">
+                  <p className="pix-confirmacao-text">
+                    Confirme que você já realizou o pagamento via PIX no valor de <strong>R$ {pedido.total.toFixed(2).replace('.', ',')}</strong> para o CNPJ <strong>62.164.737/0001-05</strong>.
+                  </p>
+                </div>
+                <button className="btn-action pix" onClick={handleConfirmarPagamentoPix}>
+                  Confirmar pagamento via PIX
+                </button>
+                <p className="pix-warning">
+                  Ao confirmar, seu pedido será atualizado e aprovado em até <strong>24 horas</strong>.
+                </p>
+              </>
+            )}
           </div>
-        ) : pagamentoConfirmado || pedido.status === 'aguardando-confirmacao-pix' ? (
+        ) : pedido.status === 'aguardando-confirmacao-pix' ? (
           <div className="pix-payment-box success">
             <div className="success-message">
               <div className="success-icon">✅</div>
-              <h3>Pagamento recebido</h3>
+              <h3>Pagamento confirmado</h3>
               <p>Seu pedido será aprovado em até <strong>24 horas</strong>.</p>
               <p className="success-detail">O comprovante foi gerado automaticamente.</p>
             </div>
