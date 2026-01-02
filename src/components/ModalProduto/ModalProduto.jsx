@@ -59,6 +59,8 @@ const ModalProduto = ({ produto, onClose }) => {
                                     alt={`Miniatura ${index + 1}`}
                                     className={`modal-miniatura ${foto === fotoPrincipal ? 'ativa' : ''}`}
                                     onMouseEnter={() => setFotoPrincipal(foto)}
+                                    onClick={() => setFotoPrincipal(foto)}
+                                    onTouchStart={() => setFotoPrincipal(foto)}
                                 />
                             ))}
                         </div>
