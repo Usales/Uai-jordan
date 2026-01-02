@@ -196,6 +196,15 @@ function DetalhesPedido() {
               </>
             )}
           </div>
+        ) : pedido.status === 'aguardando-confirmacao-pix' ? (
+          <div className="pix-payment-box success">
+            <div className="success-message">
+              <div className="success-icon">✅</div>
+              <h3>Pagamento confirmado</h3>
+              <p>Seu pedido será aprovado em até <strong>24 horas</strong>.</p>
+              <p className="success-detail">O comprovante foi gerado automaticamente.</p>
+            </div>
+          </div>
         ) : null}
       </div>
     </div>
