@@ -151,6 +151,7 @@ const inputStyle = {
 };
 
 function MinhaConta() {
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [loginKey, setLoginKey] = useState(0);
@@ -238,8 +239,6 @@ function MinhaConta() {
     };
     return statusMap[status] || { label: status, icon: '📋', cor: '#666' };
   }
-
-  const navigate = useNavigate();
 
   // Painel do usuário autenticado
   return (
