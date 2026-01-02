@@ -12,6 +12,8 @@ import Home from './pages/Home';
 import Contato from './pages/Contato';
 import PoliticaTroca from './pages/PoliticaTroca';
 import FAQ from './pages/FAQ';
+import MeusPedidos from './pages/MeusPedidos';
+import DetalhesPedido from './pages/DetalhesPedido';
 
 function AppContent() {
   const location = useLocation();
@@ -27,6 +29,8 @@ function AppContent() {
         <Route path="/contato" element={<Contato />} />
         <Route path="/carrinho" element={<Carrinho />} />
         <Route path="/minha-conta" element={<MinhaConta />} />
+        <Route path="/minha-conta/pedidos" element={<MeusPedidos />} />
+        <Route path="/minha-conta/pedidos/:id" element={<DetalhesPedido />} />
         <Route path="/login" element={<Login />} />
         <Route path="/politica-troca" element={<PoliticaTroca />} />
         <Route path="/faq" element={<FAQ />} />

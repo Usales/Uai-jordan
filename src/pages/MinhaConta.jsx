@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './MinhaConta.css';
 
 function LoginSimples({ onLogin }) {
@@ -217,66 +217,136 @@ function MinhaConta() {
     );
   }
 
+  function formatarCPF(cpf) {
+    if (!cpf) return 'Não cadastrado';
+    if (cpf.length < 11) return cpf;
+    return `***.***.${cpf.slice(-3)}-${cpf.slice(-2)}`;
+  }
+
+  // Mock de pedidos recentes
+  const pedidosRecentes = [
+    { id: '1234', data: '12/01/2026', status: 'entregue', total: 299.90 },
+    { id: '1235', data: '15/01/2026', status: 'em-transporte', total: 1299.00 }
+  ];
+
+  function getStatusInfo(status) {
+    const statusMap = {
+      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669' },
+      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7' },
+      'em-separacao': { label: 'Em separação', icon: '📦', cor: '#d97706' },
+      'cancelado': { label: 'Cancelado', icon: '❌', cor: '#dc2626' }
+    };
+    return statusMap[status] || { label: status, icon: '📋', cor: '#666' };
+  }
+
+  const navigate = useNavigate();
+
   // Painel do usuário autenticado
   return (
     <div className="minha-conta-page">
-      <div className="conta-container">
-        <h1>Minha Conta</h1>
-        <div className="conta-section">
-          <h2>Bem-vindo, {usuario.nome}!</h2>
-          <h3>Seus Dados</h3>
-          {!editando ? (
-            <>
-              <p><b>Nome:</b> {usuario.nome}</p>
-              <p><b>Email:</b> {usuario.email}</p>
-              <p><b>Endereço:</b> {usuario.endereco || <span className="nao-cadastrado">Não cadastrado</span>}</p>
-              <p><b>Telefone:</b> {usuario.telefone || <span className="nao-cadastrado">Não cadastrado</span>}</p>
-              <p><b>CPF:</b> {usuario.cpf || <span className="nao-cadastrado">Não cadastrado</span>}</p>
-              <div className="conta-actions">
-                <button onClick={() => setEditando(true)} className="btn-primary">Editar Dados</button>
-              </div>
-            </>
-          ) : (
-            <form onSubmit={e => {
-              e.preventDefault();
-              setUsuario({ ...usuario, ...dadosEdit });
-              localStorage.setItem('usuarioLogado', JSON.stringify({ ...usuario, ...dadosEdit }));
-              setEditando(false);
-            }} className="edit-form">
-              <div className="form-group">
-                <label>Nome completo</label>
-                <input type="text" name="nome" value={dadosEdit.nome} onChange={e => setDadosEdit({ ...dadosEdit, nome: e.target.value })} style={inputStyle} />
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value={dadosEdit.email} onChange={e => setDadosEdit({ ...dadosEdit, email: e.target.value })} style={inputStyle} />
-              </div>
-              <div className="form-group">
-                <label>Endereço completo</label>
-                <input type="text" name="endereco" value={dadosEdit.endereco} onChange={e => setDadosEdit({ ...dadosEdit, endereco: e.target.value })} style={inputStyle} />
-              </div>
-              <div className="form-group">
-                <label>Telefone</label>
-                <input type="text" name="telefone" value={dadosEdit.telefone} onChange={e => setDadosEdit({ ...dadosEdit, telefone: e.target.value })} style={inputStyle} />
-              </div>
-              <div className="form-group">
-                <label>CPF</label>
-                <input type="text" name="cpf" value={dadosEdit.cpf} onChange={e => setDadosEdit({ ...dadosEdit, cpf: e.target.value })} style={inputStyle} />
-              </div>
-              <div className="edit-actions">
-                <button type="submit" className="btn-primary">Salvar</button>
-                <button type="button" className="btn-cancel" onClick={() => setEditando(false)}>Cancelar</button>
-              </div>
-            </form>
-          )}
+      <div className="conta-wrapper">
+        <div className="conta-header">
+          <h1>👤 Minha Conta</h1>
+          <p className="conta-welcome">Bem-vindo, {usuario.nome}</p>
         </div>
-        <div className="conta-section">
-          <h2>Pedidos Recentes</h2>
-          <ul>
-            <li>Pedido #1234 - Entregue</li>
-            <li>Pedido #1235 - Em separação</li>
-          </ul>
+
+        <div className="conta-grid">
+          <div className="conta-card">
+            <h2>📋 Meus Dados</h2>
+            {!editando ? (
+              <div className="dados-list">
+                <div className="dado-item">
+                  <span className="dado-label">Nome:</span>
+                  <span className="dado-value">{usuario.nome}</span>
+                </div>
+                <div className="dado-item">
+                  <span className="dado-label">Email:</span>
+                  <span className="dado-value">{usuario.email}</span>
+                </div>
+                <div className="dado-item">
+                  <span className="dado-label">Telefone:</span>
+                  <span className="dado-value">{usuario.telefone || <span className="nao-cadastrado">Não cadastrado</span>}</span>
+                </div>
+                <div className="dado-item">
+                  <span className="dado-label">CPF:</span>
+                  <span className="dado-value">{formatarCPF(usuario.cpf)}</span>
+                </div>
+                <div className="dado-item">
+                  <span className="dado-label">Endereço:</span>
+                  <span className="dado-value">{usuario.endereco || <span className="nao-cadastrado">Não cadastrado</span>}</span>
+                </div>
+                <div className="conta-actions">
+                  <button onClick={() => setEditando(true)} className="btn-primary">Editar dados</button>
+                  <button className="btn-secondary">Alterar senha</button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={e => {
+                e.preventDefault();
+                setUsuario({ ...usuario, ...dadosEdit });
+                localStorage.setItem('usuarioLogado', JSON.stringify({ ...usuario, ...dadosEdit }));
+                setEditando(false);
+              }} className="edit-form">
+                <div className="form-group">
+                  <label>Nome completo</label>
+                  <input type="text" name="nome" value={dadosEdit.nome} onChange={e => setDadosEdit({ ...dadosEdit, nome: e.target.value })} style={inputStyle} />
+                </div>
+                <div className="form-group">
+                  <label>Email</label>
+                  <input type="email" name="email" value={dadosEdit.email} onChange={e => setDadosEdit({ ...dadosEdit, email: e.target.value })} style={inputStyle} />
+                </div>
+                <div className="form-group">
+                  <label>Endereço completo</label>
+                  <input type="text" name="endereco" value={dadosEdit.endereco} onChange={e => setDadosEdit({ ...dadosEdit, endereco: e.target.value })} style={inputStyle} />
+                </div>
+                <div className="form-group">
+                  <label>Telefone</label>
+                  <input type="text" name="telefone" value={dadosEdit.telefone} onChange={e => setDadosEdit({ ...dadosEdit, telefone: e.target.value })} style={inputStyle} />
+                </div>
+                <div className="form-group">
+                  <label>CPF</label>
+                  <input type="text" name="cpf" value={dadosEdit.cpf} onChange={e => setDadosEdit({ ...dadosEdit, cpf: e.target.value })} style={inputStyle} />
+                </div>
+                <div className="edit-actions">
+                  <button type="submit" className="btn-primary">Salvar</button>
+                  <button type="button" className="btn-cancel" onClick={() => setEditando(false)}>Cancelar</button>
+                </div>
+              </form>
+            )}
+          </div>
+
+          <div className="conta-card">
+            <h2>📦 Meus Pedidos</h2>
+            <div className="pedidos-resumo">
+              {pedidosRecentes.map(pedido => {
+                const statusInfo = getStatusInfo(pedido.status);
+                return (
+                  <Link
+                    key={pedido.id}
+                    to={`/minha-conta/pedidos/${pedido.id}`}
+                    className="pedido-mini-card"
+                  >
+                    <div className="pedido-mini-header">
+                      <span className="pedido-mini-id">Pedido #{pedido.id}</span>
+                      <span className="pedido-mini-status" style={{ color: statusInfo.cor }}>
+                        {statusInfo.icon} {statusInfo.label}
+                      </span>
+                    </div>
+                    <div className="pedido-mini-info">
+                      <span className="pedido-mini-data">Data: {pedido.data}</span>
+                      <span className="pedido-mini-total">Total: R$ {pedido.total.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div className="pedido-mini-action">Ver detalhes →</div>
+                  </Link>
+                );
+              })}
+            </div>
+            <Link to="/minha-conta/pedidos" className="btn-ver-todos">
+              Ver todos os pedidos
+            </Link>
+          </div>
         </div>
+
         <div className="conta-logout">
           <button onClick={handleLogout} className="btn-logout">Sair</button>
         </div>

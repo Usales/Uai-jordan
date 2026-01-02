@@ -3,7 +3,7 @@
   padding: 40px 20px;
   background: linear-gradient(180deg, #f7f7f7 0%, #fafafa 100%);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -215,50 +215,82 @@
 }
 
 /* Painel do usuário autenticado */
-.conta-container {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
-  padding: 48px 36px;
-  max-width: 520px;
+.conta-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
   width: 100%;
 }
 
-.conta-container h1 {
+.conta-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.conta-header h1 {
   font-size: 2.4rem;
   color: #C51F1F;
-  margin: 0 0 32px 0;
-  text-align: center;
+  margin: 0 0 8px 0;
   font-weight: 700;
 }
 
-.conta-section {
-  margin-bottom: 32px;
+.conta-welcome {
   font-size: 1.1rem;
-  color: #333;
-  background: #fafbfc;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+  color: #666;
+  margin: 0;
 }
 
-.conta-section h2 {
+.conta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.conta-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.conta-card h2 {
   font-size: 1.5rem;
   color: #C51F1F;
-  margin: 0 0 18px 0;
+  margin: 0 0 24px 0;
   font-weight: 700;
 }
 
-.conta-section h3 {
-  font-size: 1.2rem;
-  color: #222;
-  margin: 0 0 16px 0;
-  font-weight: 600;
+.dados-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.conta-section p {
-  margin: 8px 0;
-  line-height: 1.6;
+.dado-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dado-item:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dado-label {
+  font-weight: 600;
+  color: #555;
+  font-size: 14px;
+  min-width: 100px;
+}
+
+.dado-value {
+  color: #333;
+  font-size: 15px;
+  text-align: right;
+  flex: 1;
 }
 
 .nao-cadastrado {
@@ -268,8 +300,9 @@
 
 .conta-actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 18px;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .edit-form {
@@ -300,14 +333,93 @@
   background: #666;
 }
 
-.conta-section ul {
-  padding-left: 18px;
-  margin: 0;
+.pedidos-resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.conta-section li {
-  margin: 8px 0;
-  line-height: 1.6;
+.pedido-mini-card {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.pedido-mini-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #C51F1F;
+}
+
+.pedido-mini-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pedido-mini-id {
+  font-weight: 700;
+  font-size: 15px;
+  color: #333;
+}
+
+.pedido-mini-status {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.pedido-mini-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #666;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pedido-mini-total {
+  font-weight: 700;
+  color: #333;
+  font-size: 15px;
+}
+
+.pedido-mini-action {
+  color: #C51F1F;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.btn-ver-todos {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  background: transparent;
+  color: #C51F1F;
+  border: 2px solid #C51F1F;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-ver-todos:hover {
+  background: #C51F1F;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 31, 31, 0.2);
 }
 
 .conta-logout {
@@ -337,20 +449,35 @@
   box-shadow: 0 4px 12px rgba(183, 28, 43, 0.3);
 }
 
+@media (max-width: 900px) {
+  .conta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 600px) {
   .auth-card,
-  .conta-container {
+  .conta-card {
     padding: 24px 20px;
   }
 
   .auth-card h1,
-  .conta-container h1 {
+  .conta-header h1 {
     font-size: 24px;
   }
 
   .auth-logo {
     width: 56px;
     height: 56px;
+  }
+
+  .dado-item {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dado-value {
+    text-align: left;
   }
 }
 

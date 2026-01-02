@@ -1,0 +1,189 @@
+.meus-pedidos-page {
+  min-height: 70vh;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #f7f7f7 0%, #fafafa 100%);
+}
+
+.pedidos-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pedidos-header {
+  margin-bottom: 32px;
+}
+
+.back-link {
+  display: inline-block;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 16px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #C51F1F;
+}
+
+.pedidos-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #C51F1F;
+  margin: 0;
+}
+
+.busca-section {
+  margin-bottom: 24px;
+}
+
+.busca-box {
+  position: relative;
+}
+
+.busca-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.busca-input:focus {
+  border-color: #C51F1F;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(197, 31, 31, 0.1);
+}
+
+.filtros-section {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.filtro-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  background: #fff;
+  color: #666;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtro-btn:hover {
+  border-color: #C51F1F;
+  color: #C51F1F;
+}
+
+.filtro-btn.active {
+  background: #C51F1F;
+  color: #fff;
+  border-color: #C51F1F;
+}
+
+.pedidos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pedido-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.pedido-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pedido-id {
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.pedido-data {
+  font-size: 14px;
+  color: #666;
+}
+
+.pedido-status {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pedido-info {
+  margin-bottom: 12px;
+}
+
+.pedido-detalhes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.pedido-total {
+  font-weight: 700;
+  color: #333;
+  font-size: 16px;
+}
+
+.pedido-action {
+  color: #C51F1F;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  .pedidos-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .filtros-section {
+    gap: 8px;
+  }
+
+  .filtro-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .pedido-card {
+    padding: 16px;
+  }
+}
+
