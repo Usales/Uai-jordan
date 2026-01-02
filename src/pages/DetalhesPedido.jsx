@@ -7,6 +7,7 @@ function DetalhesPedido() {
   const navigate = useNavigate();
   const [pedido, setPedido] = useState(null);
   const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem('usuarioLogado');
@@ -47,7 +48,12 @@ function DetalhesPedido() {
   }
 
   const handleMostrarConfirmacao = () => {
-    setMostrarConfirmacao(true);
+    setIsLoading(true);
+    // Simula um pequeno delay para mostrar o loading
+    setTimeout(() => {
+      setIsLoading(false);
+      setMostrarConfirmacao(true);
+    }, 1000);
   };
 
   const handleConfirmarPagamentoPix = () => {
@@ -136,9 +142,18 @@ function DetalhesPedido() {
 
             <div className="pix-info">
               <div className="pix-icon-wrapper">
-                <svg className="pix-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#32bcad"/>
-                </svg>
+                {mostrarConfirmacao ? (
+                  <svg className="pix-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#32bcad"/>
+                  </svg>
+                ) : (
+                  <svg className="pix-icon loading-spinner" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="#32bcad" strokeWidth="2" strokeLinecap="round" strokeDasharray="62.83" strokeDashoffset="47.12" fill="none" opacity="0.3"/>
+                    <circle cx="12" cy="12" r="10" stroke="#32bcad" strokeWidth="2" strokeLinecap="round" strokeDasharray="62.83" strokeDashoffset="47.12" fill="none">
+                      <animateTransform attributeName="transform" type="rotate" values="0 12 12;360 12 12" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                  </svg>
+                )}
               </div>
               <div>
                 <p className="pix-cnpj-label">Envie o PIX para:</p>
@@ -152,8 +167,12 @@ function DetalhesPedido() {
 
             {!mostrarConfirmacao ? (
               <>
-                <button className="btn-action pix-secondary" onClick={handleMostrarConfirmacao}>
-                  Já realizei o pagamento via PIX
+                <button 
+                  className="btn-action pix-secondary" 
+                  onClick={handleMostrarConfirmacao}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Processando...' : 'Já realizei o pagamento via PIX'}
                 </button>
                 <p className="pix-warning">
                   Após realizar o pagamento, clique no botão acima para confirmar.

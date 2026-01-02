@@ -178,6 +178,19 @@
   height: 48px;
 }
 
+.pix-icon.loading-spinner {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .pix-info p {
   margin: 4px 0;
   color: #333;
