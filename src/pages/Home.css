@@ -6,6 +6,8 @@
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  background: #D72B3D;
+  min-height: 100vh;
 }
 
 .home-page::-webkit-scrollbar {

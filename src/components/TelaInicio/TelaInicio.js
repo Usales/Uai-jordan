@@ -171,7 +171,7 @@ function TelaInicio({ onHeaderColorChange }) {
   }
 
   return (
-    <div className={`tela-inicio${showFade ? ' fade-in-up' : ''}`}>
+    <div className="tela-inicio">
       <CarrosselTenis onColorChange={handleColorChange} onComprar={abrirModal} />
       <section ref={heroRef} className={`hero-section ${heroVisible ? 'hero-animated' : ''}`}>
         <div className="hero-content">
