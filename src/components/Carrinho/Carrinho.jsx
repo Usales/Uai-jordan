@@ -22,8 +22,8 @@ const Carrinho = () => {
       localStorage.setItem('carrinho', JSON.stringify(carrinhoSalvo));
     }
     setItens(carrinhoSalvo);
-    // Verifica usuário logado
-    const user = localStorage.getItem('usuario');
+    // Verifica usuário logado (verifica ambos os possíveis locais)
+    const user = localStorage.getItem('usuarioLogado') || localStorage.getItem('usuario');
     if (user) setUsuario(JSON.parse(user));
   }, []);
 
@@ -48,12 +48,16 @@ const Carrinho = () => {
   };
 
   const total = itens.reduce((acc, item) => {
-    const precoNum = Number(item.preco.replace(/[^,]/g, '').replace(',', '.'));
+    // Remove "R$", espaços e converte vírgula para ponto
+    const precoLimpo = item.preco.replace(/[R$\s]/g, '').replace(',', '.');
+    const precoNum = Number(precoLimpo) || 0;
     return acc + precoNum * item.quantidade;
   }, 0);
 
   const finalizarCompra = () => {
-    if (!usuario) {
+    // Verifica usuário logado novamente (pode ter mudado)
+    const userLogado = localStorage.getItem('usuarioLogado') || localStorage.getItem('usuario');
+    if (!userLogado) {
       setShowLoginMsg(true);
       return;
     }
@@ -61,13 +65,44 @@ const Carrinho = () => {
       alert('Seu carrinho está vazio!');
       return;
     }
-    const mensagem = itens.map(item =>
-      `Produto: ${item.nome}\nTamanho: ${item.tamanho}\nQtd: ${item.quantidade}`
-    ).join('\n---\n');
-    const totalMsg = `Total: R$ ${isNaN(total) ? '0,00' : total.toFixed(2).replace('.', ',')}`;
-    const texto = encodeURIComponent(mensagem + '\n' + totalMsg);
-    const url = `https://api.whatsapp.com/send?phone=5537991397943&text=${texto}`;
-    window.open(url, '_blank');
+
+    const usuarioAtual = JSON.parse(userLogado);
+    
+    // Cria o pedido
+    const pedidoId = Date.now().toString(); // ID único baseado em timestamp
+    const dataAtual = new Date();
+    const dataFormatada = `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`;
+    
+    const novoPedido = {
+      id: pedidoId,
+      data: dataFormatada,
+      status: 'aguardando-pagamento',
+      total: total,
+      itens: itens.map(item => {
+        const precoLimpo = item.preco.replace(/[R$\s]/g, '').replace(',', '.');
+        return {
+          nome: item.nome,
+          tamanho: item.tamanho,
+          quantidade: item.quantidade,
+          preco: Number(precoLimpo) || 0
+        };
+      }),
+      pagamento: 'A definir',
+      endereco: usuarioAtual.endereco || 'Não informado',
+      usuarioEmail: usuarioAtual.email
+    };
+
+    // Salva o pedido no localStorage
+    const pedidosExistentes = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    pedidosExistentes.push(novoPedido);
+    localStorage.setItem('pedidos', JSON.stringify(pedidosExistentes));
+
+    // Limpa o carrinho
+    localStorage.removeItem('carrinho');
+    setItens([]);
+
+    // Redireciona para Meus Pedidos
+    navigate('/minha-conta/pedidos');
   };
 
   return (

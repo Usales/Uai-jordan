@@ -15,39 +15,19 @@ function MeusPedidos() {
       navigate('/minha-conta');
       return;
     }
-    setUsuario(JSON.parse(user));
+    const usuarioAtual = JSON.parse(user);
+    setUsuario(usuarioAtual);
     
-    // Mock de pedidos - em produção viria de uma API
-    const pedidosMock = [
-      {
-        id: '1234',
-        data: '12/01/2026',
-        status: 'entregue',
-        total: 299.90,
-        itens: [{ nome: 'Air Jordan 1', tamanho: '42', preco: 299.90 }],
-        pagamento: 'Cartão de Crédito',
-        endereco: 'Rua X, nº Y - Bom Despacho/MG'
-      },
-      {
-        id: '1235',
-        data: '15/01/2026',
-        status: 'em-transporte',
-        total: 1299.00,
-        itens: [{ nome: 'Uai Jordan 1 UNC', tamanho: '40', preco: 1299.00 }],
-        pagamento: 'PIX',
-        endereco: 'Rua X, nº Y - Bom Despacho/MG'
-      },
-      {
-        id: '1236',
-        data: '18/01/2026',
-        status: 'em-separacao',
-        total: 1599.00,
-        itens: [{ nome: 'Uai Jordan 3', tamanho: '41', preco: 1599.00 }],
-        pagamento: 'Cartão de Crédito',
-        endereco: 'Rua X, nº Y - Bom Despacho/MG'
-      }
-    ];
-    setPedidos(pedidosMock);
+    // Busca pedidos do localStorage do usuário logado
+    const todosPedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    const pedidosDoUsuario = todosPedidos
+      .filter(pedido => pedido.usuarioEmail === usuarioAtual.email)
+      .sort((a, b) => {
+        // Ordena por ID (timestamp) decrescente - mais recentes primeiro
+        return parseInt(b.id) - parseInt(a.id);
+      });
+    
+    setPedidos(pedidosDoUsuario);
   }, [navigate]);
 
   const pedidosFiltrados = pedidos.filter(pedido => {
@@ -60,9 +40,10 @@ function MeusPedidos() {
 
   function getStatusInfo(status) {
     const statusMap = {
-      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669' },
-      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7' },
+      'aguardando-pagamento': { label: 'Aguardando pagamento', icon: '⏳', cor: '#f59e0b' },
       'em-separacao': { label: 'Em separação', icon: '📦', cor: '#d97706' },
+      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7' },
+      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669' },
       'cancelado': { label: 'Cancelado', icon: '❌', cor: '#dc2626' }
     };
     return statusMap[status] || { label: status, icon: '📋', cor: '#666' };
@@ -94,6 +75,12 @@ function MeusPedidos() {
             onClick={() => setFiltro('todos')}
           >
             Todos
+          </button>
+          <button
+            className={`filtro-btn ${filtro === 'aguardando-pagamento' ? 'active' : ''}`}
+            onClick={() => setFiltro('aguardando-pagamento')}
+          >
+            Aguardando pagamento
           </button>
           <button
             className={`filtro-btn ${filtro === 'em-separacao' ? 'active' : ''}`}

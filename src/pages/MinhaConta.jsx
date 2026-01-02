@@ -224,17 +224,19 @@ function MinhaConta() {
     return `***.***.${cpf.slice(-3)}-${cpf.slice(-2)}`;
   }
 
-  // Mock de pedidos recentes
-  const pedidosRecentes = [
-    { id: '1234', data: '12/01/2026', status: 'entregue', total: 299.90 },
-    { id: '1235', data: '15/01/2026', status: 'em-transporte', total: 1299.00 }
-  ];
+  // Busca pedidos recentes do localStorage
+  const todosPedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+  const pedidosRecentes = todosPedidos
+    .filter(pedido => pedido.usuarioEmail === usuario.email)
+    .sort((a, b) => parseInt(b.id) - parseInt(a.id))
+    .slice(0, 2); // Mostra apenas os 2 mais recentes
 
   function getStatusInfo(status) {
     const statusMap = {
-      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669' },
-      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7' },
+      'aguardando-pagamento': { label: 'Aguardando pagamento', icon: '⏳', cor: '#f59e0b' },
       'em-separacao': { label: 'Em separação', icon: '📦', cor: '#d97706' },
+      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7' },
+      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669' },
       'cancelado': { label: 'Cancelado', icon: '❌', cor: '#dc2626' }
     };
     return statusMap[status] || { label: status, icon: '📋', cor: '#666' };

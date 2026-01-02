@@ -14,46 +14,14 @@ function DetalhesPedido() {
       return;
     }
 
-    // Mock de pedidos - em produção viria de uma API
-    const pedidosMock = {
-      '1234': {
-        id: '1234',
-        data: '12/01/2026',
-        status: 'entregue',
-        total: 299.90,
-        itens: [
-          { nome: 'Air Jordan 1', tamanho: '42', preco: 299.90, quantidade: 1 }
-        ],
-        pagamento: 'Cartão de Crédito',
-        endereco: 'Rua X, nº Y - Bom Despacho/MG',
-        codigoRastreamento: 'BR123456789BR'
-      },
-      '1235': {
-        id: '1235',
-        data: '15/01/2026',
-        status: 'em-transporte',
-        total: 1299.00,
-        itens: [
-          { nome: 'Uai Jordan 1 UNC', tamanho: '40', preco: 1299.00, quantidade: 1 }
-        ],
-        pagamento: 'PIX',
-        endereco: 'Rua X, nº Y - Bom Despacho/MG',
-        codigoRastreamento: 'BR987654321BR'
-      },
-      '1236': {
-        id: '1236',
-        data: '18/01/2026',
-        status: 'em-separacao',
-        total: 1599.00,
-        itens: [
-          { nome: 'Uai Jordan 3', tamanho: '41', preco: 1599.00, quantidade: 1 }
-        ],
-        pagamento: 'Cartão de Crédito',
-        endereco: 'Rua X, nº Y - Bom Despacho/MG'
-      }
-    };
+    const usuarioAtual = JSON.parse(user);
+    
+    // Busca pedidos do localStorage
+    const todosPedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    const pedidoEncontrado = todosPedidos.find(
+      p => p.id === id && p.usuarioEmail === usuarioAtual.email
+    );
 
-    const pedidoEncontrado = pedidosMock[id];
     if (pedidoEncontrado) {
       setPedido(pedidoEncontrado);
     } else {
@@ -67,9 +35,10 @@ function DetalhesPedido() {
 
   function getStatusInfo(status) {
     const statusMap = {
-      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669', bg: '#d1fae5' },
-      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7', bg: '#dbeafe' },
+      'aguardando-pagamento': { label: 'Aguardando pagamento', icon: '⏳', cor: '#f59e0b', bg: '#fef3c7' },
       'em-separacao': { label: 'Em separação', icon: '📦', cor: '#d97706', bg: '#fef3c7' },
+      'em-transporte': { label: 'Em transporte', icon: '🚚', cor: '#0284c7', bg: '#dbeafe' },
+      'entregue': { label: 'Entregue', icon: '✅', cor: '#059669', bg: '#d1fae5' },
       'cancelado': { label: 'Cancelado', icon: '❌', cor: '#dc2626', bg: '#fee2e2' }
     };
     return statusMap[status] || { label: status, icon: '📋', cor: '#666', bg: '#f3f4f6' };
