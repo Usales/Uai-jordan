@@ -17,8 +17,30 @@ const ModalProduto = ({ produto, onClose }) => {
             return;
         }
         setMensagemErro('');
-        // Aqui você pode adicionar ao carrinho normalmente
-        // ...
+        
+        // Estrutura do item do carrinho
+        const item = {
+            id: produto.id || produto.nome,
+            nome: produto.nome,
+            imagem: produto.fotos[0],
+            preco: produto.preco,
+            tamanho: tamanhoSelecionado,
+            quantidade: 1
+        };
+        
+        // Adiciona ao carrinho
+        let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        // Verifica se já existe o mesmo produto e tamanho
+        const idx = carrinho.findIndex(p => p.id === item.id && p.tamanho === item.tamanho);
+        if (idx !== -1) {
+            carrinho[idx].quantidade += 1;
+        } else {
+            carrinho.push(item);
+        }
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        
+        // Fecha o modal após adicionar
+        onClose();
     }
 
     return (
