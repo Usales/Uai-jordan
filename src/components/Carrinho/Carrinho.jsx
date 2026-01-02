@@ -48,18 +48,11 @@ const Carrinho = () => {
   };
 
   const total = itens.reduce((acc, item) => {
-    let precoNum = 0;
-    
-    // Se o preço já for um número, usa diretamente
-    if (typeof item.preco === 'number') {
-      precoNum = item.preco;
-    } else if (typeof item.preco === 'string') {
-      // Remove "R$", espaços e converte vírgula para ponto
-      const precoLimpo = item.preco.replace(/[R$\s]/g, '').replace(',', '.');
-      precoNum = Number(precoLimpo) || 0;
-    }
-    
-    // Multiplica pelo preço unitário pela quantidade
+    // Remove "R$", espaços, pontos (separadores de milhar) e converte vírgula para ponto (decimal)
+    let precoLimpo = item.preco.replace(/[R$\s]/g, ''); // Remove R$ e espaços
+    precoLimpo = precoLimpo.replace(/\./g, ''); // Remove pontos (separadores de milhar)
+    precoLimpo = precoLimpo.replace(',', '.'); // Converte vírgula para ponto (decimal)
+    const precoNum = Number(precoLimpo) || 0;
     return acc + (precoNum * (item.quantidade || 1));
   }, 0);
 
@@ -88,7 +81,9 @@ const Carrinho = () => {
       status: 'aguardando-pagamento',
       total: total,
       itens: itens.map(item => {
-        const precoLimpo = item.preco.replace(/[R$\s]/g, '').replace(',', '.');
+        let precoLimpo = item.preco.replace(/[R$\s]/g, ''); // Remove R$ e espaços
+        precoLimpo = precoLimpo.replace(/\./g, ''); // Remove pontos (separadores de milhar)
+        precoLimpo = precoLimpo.replace(',', '.'); // Converte vírgula para ponto (decimal)
         return {
           nome: item.nome,
           tamanho: item.tamanho,
@@ -147,21 +142,7 @@ const Carrinho = () => {
                     <input type="number" min="1" max="10" value={item.quantidade} onChange={e => atualizarQuantidade(idx, Number(e.target.value))} />
                   </label>
                 </div>
-                <div className="carrinho-preco">
-                  <div>Preço unitário: {item.preco}</div>
-                  <div className="carrinho-subtotal">
-                    Subtotal: R$ {(() => {
-                      let precoNum = 0;
-                      if (typeof item.preco === 'number') {
-                        precoNum = item.preco;
-                      } else if (typeof item.preco === 'string') {
-                        const precoLimpo = item.preco.replace(/[R$\s]/g, '').replace(',', '.');
-                        precoNum = Number(precoLimpo) || 0;
-                      }
-                      return (precoNum * (item.quantidade || 1)).toFixed(2).replace('.', ',');
-                    })()}
-                  </div>
-                </div>
+                <div className="carrinho-preco">Preço: {item.preco}</div>
                 <button className="carrinho-remover" onClick={() => removerItem(idx)}>Remover</button>
               </div>
             </div>

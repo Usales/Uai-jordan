@@ -114,21 +114,6 @@
   color: #D72B3D;
   font-weight: 700;
   margin-bottom: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.carrinho-preco > div:first-child {
-  font-size: 0.95rem;
-  color: #6b7280;
-  font-weight: 500;
-}
-
-.carrinho-subtotal {
-  font-size: 1.1rem;
-  color: #1f2937;
-  font-weight: 700;
 }
 .carrinho-remover {
   background: #b71c2b;
