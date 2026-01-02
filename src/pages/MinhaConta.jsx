@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import Cadastro, { CadastroBotaoVerde } from '../components/Cadastro/Cadastro';
+import { Link } from 'react-router-dom';
+import './MinhaConta.css';
 
 function LoginSimples({ onLogin }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
   const [mensagem, setMensagem] = useState('');
-  // const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,21 +24,44 @@ function LoginSimples({ onLogin }) {
     }
     localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
     setMensagem('Login realizado com sucesso!');
-    setEmail(''); setSenha('');
+    setEmail('');
+    setSenha('');
     setTimeout(() => {
       if (onLogin) onLogin();
     }, 800);
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form className="login-form" onSubmit={handleLogin} style={{ maxWidth: 400, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 16, marginTop: 24 }}>
-        <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} style={inputStyle} />
-        <input type="password" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} style={inputStyle} />
-        <button type="submit" style={{ background: '#D72B3D', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 32px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', marginTop: 8 }}>Entrar</button>
-        {erro && <div className="login-erro" style={{ color: '#b71c2b', marginTop: 8 }}>{erro}</div>}
-        {mensagem && <div className="login-sucesso" style={{ color: '#00863B', marginTop: 8 }}>{mensagem}</div>}
+    <div className="login-simples">
+      <h2>Bem-vindo de volta</h2>
+      <p className="login-subtitle">Acesse sua conta para continuar</p>
+      <form className="login-form" onSubmit={handleLogin}>
+        <div className="form-group">
+          <label htmlFor="email-login">Email</label>
+          <input
+            type="email"
+            id="email-login"
+            placeholder="seu@email.com"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="senha-login">Senha</label>
+          <input
+            type="password"
+            id="senha-login"
+            placeholder="••••••••"
+            value={senha}
+            onChange={e => setSenha(e.target.value)}
+            required
+          />
+          <a href="#" className="forgot-link">Esqueceu sua senha?</a>
+        </div>
+        <button type="submit" className="btn-primary">Entrar</button>
+        {erro && <div className="login-erro">{erro}</div>}
+        {mensagem && <div className="login-sucesso">{mensagem}</div>}
       </form>
     </div>
   );
@@ -58,8 +80,8 @@ function CadastroForm({ onConcluir }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setErro(''); setSucesso('');
-    // Validação simples
+    setErro('');
+    setSucesso('');
     if (!form.nome || !form.email || !form.senha || !form.endereco || !form.telefone || !form.cpf) {
       setErro('Preencha todos os campos.');
       return;
@@ -68,7 +90,6 @@ function CadastroForm({ onConcluir }) {
       setErro('A senha deve ter pelo menos 6 caracteres.');
       return;
     }
-    // Salvar usuário no localStorage
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
     if (usuarios.some(u => u.email === form.email)) {
       setErro('E-mail já cadastrado.');
@@ -85,29 +106,54 @@ function CadastroForm({ onConcluir }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 24 }}>
-      <input type="text" name="nome" placeholder="Nome completo" value={form.nome} onChange={handleChange} style={inputStyle} />
-      <input type="email" name="email" placeholder="E-mail" value={form.email} onChange={handleChange} style={inputStyle} />
-      <input type="password" name="senha" placeholder="Senha" value={form.senha} onChange={handleChange} style={inputStyle} />
-      <input type="text" name="endereco" placeholder="Endereço completo" value={form.endereco} onChange={handleChange} style={inputStyle} />
-      <input type="text" name="telefone" placeholder="Telefone" value={form.telefone} onChange={handleChange} style={inputStyle} />
-      <input type="text" name="cpf" placeholder="CPF" value={form.cpf} onChange={handleChange} style={inputStyle} />
-      <button type="submit" style={{ background: '#00863B', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 32px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', marginTop: 8 }}>Concluir Cadastro</button>
-      {erro && <div style={{ color: '#b71c2b', marginTop: 8 }}>{erro}</div>}
-      {sucesso && <div style={{ color: '#00863B', marginTop: 8 }}>{sucesso}</div>}
+    <form onSubmit={handleSubmit} className="cadastro-form">
+      <h2>Criar conta</h2>
+      <p className="cadastro-subtitle">Preencha seus dados para começar</p>
+      <div className="form-group">
+        <label htmlFor="nome">Nome completo</label>
+        <input type="text" name="nome" id="nome" placeholder="Seu nome completo" value={form.nome} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="email-cad">Email</label>
+        <input type="email" name="email" id="email-cad" placeholder="seu@email.com" value={form.email} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="senha-cad">Senha</label>
+        <input type="password" name="senha" id="senha-cad" placeholder="Mínimo 6 caracteres" value={form.senha} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="endereco">Endereço completo</label>
+        <input type="text" name="endereco" id="endereco" placeholder="Rua, número, bairro" value={form.endereco} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="telefone">Telefone</label>
+        <input type="text" name="telefone" id="telefone" placeholder="(00) 00000-0000" value={form.telefone} onChange={handleChange} required />
+      </div>
+      <div className="form-group">
+        <label htmlFor="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" value={form.cpf} onChange={handleChange} required />
+      </div>
+      <button type="submit" className="btn-primary">Concluir Cadastro</button>
+      {erro && <div className="login-erro">{erro}</div>}
+      {sucesso && <div className="login-sucesso">{sucesso}</div>}
     </form>
   );
 }
 
 const inputStyle = {
-  padding: '12px', borderRadius: 8, border: '1px solid #ccc', fontSize: '1rem', outline: 'none', width: '100%'
+  padding: '12px',
+  borderRadius: 8,
+  border: '1px solid #ccc',
+  fontSize: '1rem',
+  outline: 'none',
+  width: '100%',
+  boxSizing: 'border-box'
 };
 
 function MinhaConta() {
   const [usuario, setUsuario] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [loginKey, setLoginKey] = useState(0);
-  // const navigate = useNavigate();
   const [editando, setEditando] = useState(false);
   const [dadosEdit, setDadosEdit] = useState({ nome: '', email: '', endereco: '', telefone: '', cpf: '' });
 
@@ -131,14 +177,14 @@ function MinhaConta() {
     localStorage.removeItem('usuarioLogado');
     setUsuario(null);
     setLoginKey(k => k + 1);
-    // navigate('/minha-conta');
   }
 
   if (!usuario) {
     return (
-      <div style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}>
-        <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 2px 16px rgba(0,0,0,0.08)', padding: '36px 28px 28px 28px', maxWidth: 400, width: '100%', textAlign: 'center' }}>
-          <h1 style={{ fontFamily: 'Bebas Neue, Arial, sans-serif', fontSize: '2.2rem', color: '#D72B3D', marginBottom: 18, letterSpacing: 1 }}>Minha Conta</h1>
+      <div className="minha-conta-page">
+        <div className="auth-card">
+          <img src="/imagens/logo.png" alt="UAI-JORDAN" className="auth-logo" />
+          <h1>Minha Conta</h1>
           {!mostrarCadastro ? (
             <>
               <LoginSimples
@@ -148,10 +194,23 @@ function MinhaConta() {
                   if (user) setUsuario(JSON.parse(user));
                 }}
               />
-              <button onClick={() => setMostrarCadastro(true)} style={{ marginTop: 24, background: '#00863B', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 32px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>Cadastrar</button>
+              <div className="auth-divider">
+                <span>Não tem conta?</span>
+              </div>
+              <button onClick={() => setMostrarCadastro(true)} className="btn-secondary">
+                Criar conta
+              </button>
             </>
           ) : (
-            <CadastroForm onConcluir={() => setMostrarCadastro(false)} />
+            <>
+              <CadastroForm onConcluir={() => setMostrarCadastro(false)} />
+              <div className="auth-divider">
+                <span>Já tem conta?</span>
+              </div>
+              <button onClick={() => setMostrarCadastro(false)} className="btn-secondary">
+                Fazer login
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -160,50 +219,70 @@ function MinhaConta() {
 
   // Painel do usuário autenticado
   return (
-    <div style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}>
-      <div style={{ background: '#fff', borderRadius: 20, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', padding: '48px 36px 36px 36px', maxWidth: 520, width: '100%', transition: 'box-shadow 0.2s' }}>
-        <h1 style={{ fontFamily: 'Bebas Neue, Arial, sans-serif', fontSize: '2.4rem', color: '#D72B3D', marginBottom: 24, letterSpacing: 1, textAlign: 'center', marginTop: 0 }}>Minha Conta</h1>
-        <div style={{ marginBottom: 32, fontSize: '1.1rem', color: '#333', textAlign: 'left', background: '#fafbfc', borderRadius: 12, padding: 24, boxShadow: '0 1px 6px rgba(0,0,0,0.04)' }}>
-          <h2 style={{ fontFamily: 'Bebas Neue, Arial, sans-serif', fontSize: '1.5rem', color: '#D72B3D', marginBottom: 18 }}>Bem-vindo, {usuario.nome}!</h2>
-          <h3 style={{ fontFamily: 'Bebas Neue, Arial, sans-serif', fontSize: '1.2rem', color: '#222', marginBottom: 16 }}>Seus Dados</h3>
+    <div className="minha-conta-page">
+      <div className="conta-container">
+        <h1>Minha Conta</h1>
+        <div className="conta-section">
+          <h2>Bem-vindo, {usuario.nome}!</h2>
+          <h3>Seus Dados</h3>
           {!editando ? (
             <>
               <p><b>Nome:</b> {usuario.nome}</p>
               <p><b>Email:</b> {usuario.email}</p>
-              <p><b>Endereço:</b> {usuario.endereco || <span style={{ color: '#888' }}>Não cadastrado</span>}</p>
-              <p><b>Telefone:</b> {usuario.telefone || <span style={{ color: '#888' }}>Não cadastrado</span>}</p>
-              <p><b>CPF:</b> {usuario.cpf || <span style={{ color: '#888' }}>Não cadastrado</span>}</p>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 18 }}>
-                <button onClick={() => setEditando(true)} style={{ background: '#00863B', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer' }}>Editar Dados</button>
+              <p><b>Endereço:</b> {usuario.endereco || <span className="nao-cadastrado">Não cadastrado</span>}</p>
+              <p><b>Telefone:</b> {usuario.telefone || <span className="nao-cadastrado">Não cadastrado</span>}</p>
+              <p><b>CPF:</b> {usuario.cpf || <span className="nao-cadastrado">Não cadastrado</span>}</p>
+              <div className="conta-actions">
+                <button onClick={() => setEditando(true)} className="btn-primary">Editar Dados</button>
               </div>
             </>
           ) : (
-            <form onSubmit={e => { e.preventDefault(); setUsuario({ ...usuario, ...dadosEdit }); localStorage.setItem('usuarioLogado', JSON.stringify({ ...usuario, ...dadosEdit })); setEditando(false); }} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <input type="text" name="nome" placeholder="Nome completo" value={dadosEdit.nome} onChange={e => setDadosEdit({ ...dadosEdit, nome: e.target.value })} style={inputStyle} />
-              <input type="email" name="email" placeholder="E-mail" value={dadosEdit.email} onChange={e => setDadosEdit({ ...dadosEdit, email: e.target.value })} style={inputStyle} />
-              <input type="text" name="endereco" placeholder="Endereço completo" value={dadosEdit.endereco} onChange={e => setDadosEdit({ ...dadosEdit, endereco: e.target.value })} style={inputStyle} />
-              <input type="text" name="telefone" placeholder="Telefone" value={dadosEdit.telefone} onChange={e => setDadosEdit({ ...dadosEdit, telefone: e.target.value })} style={inputStyle} />
-              <input type="text" name="cpf" placeholder="CPF" value={dadosEdit.cpf} onChange={e => setDadosEdit({ ...dadosEdit, cpf: e.target.value })} style={inputStyle} />
-              <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-                <button type="submit" style={{ background: '#00863B', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer' }}>Salvar</button>
-                <button type="button" style={{ background: '#888', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setEditando(false)}>Cancelar</button>
+            <form onSubmit={e => {
+              e.preventDefault();
+              setUsuario({ ...usuario, ...dadosEdit });
+              localStorage.setItem('usuarioLogado', JSON.stringify({ ...usuario, ...dadosEdit }));
+              setEditando(false);
+            }} className="edit-form">
+              <div className="form-group">
+                <label>Nome completo</label>
+                <input type="text" name="nome" value={dadosEdit.nome} onChange={e => setDadosEdit({ ...dadosEdit, nome: e.target.value })} style={inputStyle} />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value={dadosEdit.email} onChange={e => setDadosEdit({ ...dadosEdit, email: e.target.value })} style={inputStyle} />
+              </div>
+              <div className="form-group">
+                <label>Endereço completo</label>
+                <input type="text" name="endereco" value={dadosEdit.endereco} onChange={e => setDadosEdit({ ...dadosEdit, endereco: e.target.value })} style={inputStyle} />
+              </div>
+              <div className="form-group">
+                <label>Telefone</label>
+                <input type="text" name="telefone" value={dadosEdit.telefone} onChange={e => setDadosEdit({ ...dadosEdit, telefone: e.target.value })} style={inputStyle} />
+              </div>
+              <div className="form-group">
+                <label>CPF</label>
+                <input type="text" name="cpf" value={dadosEdit.cpf} onChange={e => setDadosEdit({ ...dadosEdit, cpf: e.target.value })} style={inputStyle} />
+              </div>
+              <div className="edit-actions">
+                <button type="submit" className="btn-primary">Salvar</button>
+                <button type="button" className="btn-cancel" onClick={() => setEditando(false)}>Cancelar</button>
               </div>
             </form>
           )}
         </div>
-        <div style={{ fontSize: '1.1rem', color: '#333', textAlign: 'left', background: '#fafbfc', borderRadius: 12, padding: 24, boxShadow: '0 1px 6px rgba(0,0,0,0.04)', marginBottom: 32 }}>
-          <h2 style={{ fontFamily: 'Bebas Neue, Arial, sans-serif', fontSize: '1.5rem', color: '#D72B3D', marginBottom: 18 }}>Pedidos Recentes</h2>
-          <ul style={{ paddingLeft: 18 }}>
+        <div className="conta-section">
+          <h2>Pedidos Recentes</h2>
+          <ul>
             <li>Pedido #1234 - Entregue</li>
             <li>Pedido #1235 - Em separação</li>
           </ul>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-          <button onClick={handleLogout} style={{ background: '#b71c2b', color: '#fff', border: 'none', borderRadius: 8, padding: '16px 0', fontSize: '1.2rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', maxWidth: 320, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>Sair</button>
+        <div className="conta-logout">
+          <button onClick={handleLogout} className="btn-logout">Sair</button>
         </div>
       </div>
     </div>
   );
 }
 
-export default MinhaConta; 
+export default MinhaConta;

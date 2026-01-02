@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
   const [form, setForm] = useState({ email: '', senha: '' });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,9 +21,11 @@ function Login() {
       const data = await res.json();
       if (res.ok) {
         setStatus({ type: 'success', msg: data.message });
-        // Salva dados do usuário no localStorage (mock de login)
         localStorage.setItem('usuario', JSON.stringify({ nome: data.nome, email: data.email }));
         setForm({ email: '', senha: '' });
+        setTimeout(() => {
+          navigate('/minha-conta');
+        }, 1000);
       } else {
         setStatus({ type: 'error', msg: data.message });
       }
@@ -35,29 +40,61 @@ function Login() {
   }
 
   return (
-    <div style={{ padding: '2rem', maxWidth: 400, margin: '0 auto' }}>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Email:<br />
-            <input type="email" name="email" value={form.email} onChange={handleChange} style={{ width: '100%' }} required />
-          </label>
+    <div className="login-page">
+      <div className="auth-card">
+        <img src="/imagens/logo.png" alt="UAI-JORDAN" className="auth-logo" />
+        <h1>Bem-vindo de volta</h1>
+        <p>Acesse sua conta para continuar</p>
+        
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="seu@email.com"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              value={form.senha}
+              onChange={handleChange}
+              placeholder="••••••••"
+              required
+            />
+            <a href="#" className="forgot-link">Esqueceu sua senha?</a>
+          </div>
+
+          <button type="submit" disabled={loading} className="btn-primary">
+            {loading ? 'Entrando...' : 'Entrar'}
+          </button>
+        </form>
+
+        {status && (
+          <div className={`status-message ${status.type}`}>
+            {status.msg}
+          </div>
+        )}
+
+        <div className="auth-divider">
+          <span>Não tem conta?</span>
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Senha:<br />
-            <input type="password" name="senha" value={form.senha} onChange={handleChange} style={{ width: '100%' }} required />
-          </label>
-        </div>
-        <button type="submit" disabled={loading}>{loading ? 'Entrando...' : 'Entrar'}</button>
-        <button style={{ marginTop: 16, background: '#00863B', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 32px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>
-          Cadastrar
-        </button>
-      </form>
-      {status && (
-        <p style={{ color: status.type === 'success' ? 'green' : 'red', marginTop: '1rem' }}>{status.msg}</p>
-      )}
+
+        <Link to="/minha-conta" className="btn-secondary">
+          Criar conta
+        </Link>
+      </div>
     </div>
   );
 }
 
-export default Login; 
+export default Login;
