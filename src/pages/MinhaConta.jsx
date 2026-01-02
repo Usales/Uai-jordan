@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './MinhaConta.css';
 
 function LoginSimples({ onLogin }) {
@@ -57,7 +57,7 @@ function LoginSimples({ onLogin }) {
             onChange={e => setSenha(e.target.value)}
             required
           />
-          <a href="#" className="forgot-link">Esqueceu sua senha?</a>
+          <Link to="/esqueci-senha" className="forgot-link">Esqueceu sua senha?</Link>
         </div>
         <button type="submit" className="btn-primary">Entrar</button>
         {erro && <div className="login-erro">{erro}</div>}
@@ -151,7 +151,6 @@ const inputStyle = {
 };
 
 function MinhaConta() {
-  const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [loginKey, setLoginKey] = useState(0);

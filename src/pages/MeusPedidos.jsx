@@ -6,7 +6,6 @@ function MeusPedidos() {
   const [pedidos, setPedidos] = useState([]);
   const [filtro, setFiltro] = useState('todos');
   const [busca, setBusca] = useState('');
-  const [usuario, setUsuario] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +15,6 @@ function MeusPedidos() {
       return;
     }
     const usuarioAtual = JSON.parse(user);
-    setUsuario(usuarioAtual);
     
     // Busca pedidos do localStorage do usuário logado
     const todosPedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');

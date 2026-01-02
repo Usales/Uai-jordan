@@ -71,7 +71,7 @@ function Login() {
               placeholder="••••••••"
               required
             />
-            <a href="#" className="forgot-link">Esqueceu sua senha?</a>
+            <Link to="/esqueci-senha" className="forgot-link">Esqueceu sua senha?</Link>
           </div>
 
           <button type="submit" disabled={loading} className="btn-primary">

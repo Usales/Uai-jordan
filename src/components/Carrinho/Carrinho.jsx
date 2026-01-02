@@ -4,7 +4,6 @@ import './Carrinho.css';
 
 const Carrinho = () => {
   const [itens, setItens] = useState([]);
-  const [usuario, setUsuario] = useState(null);
   const [showLoginMsg, setShowLoginMsg] = useState(false);
   const navigate = useNavigate();
 
@@ -22,9 +21,6 @@ const Carrinho = () => {
       localStorage.setItem('carrinho', JSON.stringify(carrinhoSalvo));
     }
     setItens(carrinhoSalvo);
-    // Verifica usuário logado (verifica ambos os possíveis locais)
-    const user = localStorage.getItem('usuarioLogado') || localStorage.getItem('usuario');
-    if (user) setUsuario(JSON.parse(user));
   }, []);
 
   const atualizarQuantidade = (index, novaQtd) => {

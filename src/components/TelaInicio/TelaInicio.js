@@ -80,13 +80,8 @@ function TelaInicio({ onHeaderColorChange }) {
   const [mensagemCarrinho, setMensagemCarrinho] = useState('');
   const featuresRef = useScrollFadeIn();
   const produtosRef = useScrollFadeIn();
-  const [showFade, setShowFade] = useState(false);
   const heroRef = useRef(null);
   const [heroVisible, setHeroVisible] = useState(false);
-
-  useEffect(() => {
-    setShowFade(true);
-  }, []);
 
   useEffect(() => {
     const currentRef = heroRef.current;
