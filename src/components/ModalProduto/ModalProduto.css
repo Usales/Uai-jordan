@@ -87,6 +87,21 @@
     box-sizing: border-box;
     height: 100%;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-galeria::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(180,180,180,0.15) 0%, rgba(80, 80, 80, 0.1) 100%);
+    z-index: 0;
 }
 
 .modal-foto-principal {
@@ -94,9 +109,11 @@
     height: 400px;
     object-fit: contain;
     border-radius: 12px;
-    background: #fff;
+    background: transparent;
     display: block;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .modal-miniaturas {
@@ -199,4 +216,30 @@
 
 .modal-comprar:hover {
     background-color: #b71c2b;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 600px) {
+    .modal-galeria::before {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .modal-foto-principal {
+        height: 300px;
+    }
+    
+    .modal-body {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .modal-galeria {
+        flex: 1;
+        padding: 20px 16px 0 16px;
+    }
+    
+    .modal-sidebar {
+        flex: 1;
+    }
 } 
