@@ -17,9 +17,8 @@
 .nav-container {
   position: relative;
   width: 100%;
-  /* Remover max-width e margin para ocupar toda a tela */
   margin: 0;
-  padding: 0 4px;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,6 +82,13 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu-text {
+  white-space: nowrap;
 }
 
 .nav-menu a::after {
@@ -160,12 +166,6 @@
   letter-spacing: 0.5px;
   display: inline-block;
 }
-@media (min-width: 901px) {
-  .menu-toggle-label {
-    display: none;
-  }
-}
-
 /* Esconde menu dropdown antigo em mobile - agora usamos bottom sheet */
 @media (max-width: 900px) {
   .nav-menu {
@@ -180,6 +180,9 @@
   .menu-toggle {
     display: none;
   }
+  .menu-toggle-label {
+    display: none;
+  }
   .nav-menu {
     position: static;
     flex-direction: row;
@@ -191,69 +194,74 @@
     width: auto;
     border-radius: 0;
     padding: 0;
+    gap: 2px;
+    align-items: center;
   }
   .nav-menu a {
     transition: background 0.2s, color 0.2s;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border-radius: 8px;
   }
   .nav-menu a:hover {
-    background: #fff2;
-    color: #222;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+  .nav-menu a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-bottom: none;
+    padding-bottom: 10px;
+  }
+  .nav-menu a.active::after {
+    display: none;
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-width: 900px) {
   .brand-title {
-    font-size: 22px;
+    font-size: 20px;
   }
   .cart-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    letter-spacing: 1px;
-  }
-  .nav-menu {
-    gap: 15px;
-  }
-  .nav-menu a {
-    font-size: 1.05rem;
-    padding: 7px 12px;
-  }
-  .nav-menu li:nth-child(2) a {
-    display: inline-block;
+    font-size: 14px;
+    padding: 8px 16px;
+    letter-spacing: 0.5px;
   }
 }
 
 @media (min-width: 768px) {
   .nav-container {
-    padding: 0 8px;
-    min-height: 60px;
-    /* max-width removido */
+    padding: 0 24px;
+    min-height: 70px;
   }
   .brand-title {
-    font-size: 26px;
-    letter-spacing: 2px;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    margin-right: 40px;
   }
   .cart-button {
-    font-size: 18px;
-    padding: 12px 24px;
-  }
-  .nav-menu {
-    gap: 30px;
-  }
-  .nav-menu a {
-    font-size: 1.12rem;
-    padding: 8px 14px;
+    font-size: 15px;
+    padding: 10px 20px;
   }
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 1200px) {
+  .nav-container {
+    padding: 0 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .brand-title {
+    font-size: 24px;
+    margin-right: 48px;
+  }
   .nav-menu {
     gap: 4px;
-    padding-right: 8px;
-    padding-left: 8px;
   }
   .nav-menu a {
-    font-size: 0.95rem;
-    padding: 5px 8px;
+    font-size: 0.94rem;
+    padding: 10px 16px;
   }
 }
 

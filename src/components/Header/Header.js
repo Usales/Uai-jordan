@@ -71,8 +71,7 @@ function Header({ bgColor, noSticky }) {
                   to={item.path} 
                   className={location.pathname === item.path ? 'active' : ''}
                 >
-                  {item.icon}
-                  <span>{item.label}</span>
+                  <span className="nav-menu-text">{item.label}</span>
                 </Link>
               </li>
             ))}
