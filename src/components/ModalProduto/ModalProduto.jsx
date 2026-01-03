@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './ModalProduto.css';
 
